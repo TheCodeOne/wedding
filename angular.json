@@ -30,7 +30,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@aposin/ng-aquila/css/normalize.css",
+              "node_modules/@aposin/ng-aquila/css/utilities.css",
+              "node_modules/@aposin/ng-aquila/themes/aposin.css"
             ],
             "scripts": []
           },
@@ -100,5 +103,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "84f2ec5b-beff-4c83-be7a-5076ff0ac54c"
   }
 }
