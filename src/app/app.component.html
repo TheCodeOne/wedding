@@ -1,6 +1,25 @@
 <div class="starter-app">
+	<div nxLayout="grid">
+		<div nxRow>
+			<div nxCol="2" colOffset="10">
+				<nx-dropdown value="🇩🇪" style="width: 70px; font-size: 25px; float: right">
+					<nx-dropdown-item (click)="changeLanguage('de')" value="🇩🇪"></nx-dropdown-item>
+					<nx-dropdown-item (click)="changeLanguage('gr')" value="🇬🇷"></nx-dropdown-item>
+					<nx-dropdown-item (click)="changeLanguage('ua')" value="🇺🇦"></nx-dropdown-item>
+				</nx-dropdown>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div>
+		<span (click)="changeLanguage('de')">🇩🇪</span>
+		<span (click)="changeLanguage('gr')">🇬🇷</span>
+		<span (click)="changeLanguage('ua')">🇺🇦</span>
+	</div> -->
 	<nx-small-stage>
-		<h1 nxHeadline="section">Hochzeit?</h1>
+		<h1 nxHeadline="section">
+			{{ 'HOCHZEIT' | translate }}
+		</h1>
 	</nx-small-stage>
 	<form class="form-example nx-margin-top-s">
 		<div nxLayout="grid">

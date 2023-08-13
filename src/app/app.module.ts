@@ -1,4 +1,4 @@
-import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http'
+import { HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
@@ -23,6 +23,12 @@ import { NxSmallStageModule } from '@aposin/ng-aquila/small-stage'
 import { NxNaturalLanguageFormModule } from '@aposin/ng-aquila/natural-language-form'
 
 import { AppComponent } from './app.component'
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+
+export function HttpLoaderFactory(http: HttpClient) {
+	return new TranslateHttpLoader(http)
+}
 
 @NgModule({
 	declarations: [AppComponent],
@@ -51,6 +57,14 @@ import { AppComponent } from './app.component'
 		NxPopoverModule,
 		NxSmallStageModule,
 		NxNaturalLanguageFormModule,
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: HttpLoaderFactory,
+				deps: [HttpClient],
+			},
+			defaultLanguage: 'de',
+		}),
 	],
 	bootstrap: [AppComponent],
 })

@@ -1,6 +1,7 @@
 import { Component, TemplateRef, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
+import { TranslateService } from '@ngx-translate/core'
 
 @Component({
 	selector: 'app-root',
@@ -23,7 +24,14 @@ export class AppComponent {
 	plusOneEligable: boolean = true
 	hasPlusOne: boolean = true
 
-	constructor(readonly dialogService: NxDialogService, private readonly fb: FormBuilder) {}
+	constructor(readonly dialogService: NxDialogService, private readonly fb: FormBuilder, private translate: TranslateService) {
+		translate.setDefaultLang('de')
+		translate.use('de')
+	}
+
+	changeLanguage(key: string): void {
+		this.translate.use(key)
+	}
 
 	showChildrenPhrase(): boolean {
 		return !!Number(this.naturalForm.get('childrenAmount')?.value)
