@@ -1,0 +1,66 @@
+<form class="form-example nx-margin-top-s">
+	<nx-natural-language-form [formGroup]="naturalForm">
+		<div *ngIf="plusOneEligable">
+			Ich werde
+			<nx-word size="long" label="Always a label">
+				<nx-dropdown formControlName="hasPlusOne">
+					<nx-dropdown-item value="false">alleine</nx-dropdown-item>
+					<nx-dropdown-item value="true">mit einer weiteren Person</nx-dropdown-item>
+				</nx-dropdown>
+				<div nxError>deng?!</div>
+			</nx-word>
+			kommen.
+
+			<ng-container formGroupName="plusOne" *ngIf="showPlusOnePhrase()">
+				Meine partnende Person heisst
+				<nx-word size="long" label="Always a label">
+					<input nxInput formControlName="name" />
+					<div nxError>This field is required.</div>
+				</nx-word>
+
+				. {{ getPlusOneName() }} ist
+				<nx-word size="long" label="Always a label">
+					<nx-dropdown formControlName="mealType">
+						<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
+						<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
+						<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
+					</nx-dropdown>
+					<div nxError>Was frisch?.</div>
+				</nx-word>
+			</ng-container>
+
+			Ich {{ showPlusOnePhrase() ? 'selber' : '' }} bin
+			<nx-word size="long" label="Always a label">
+				<nx-dropdown formControlName="mealType">
+					<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
+					<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
+					<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
+				</nx-dropdown>
+				<div nxError>Was frisch?.</div> </nx-word
+			>.
+
+			{{ showPlusOnePhrase() ? 'Wir bringen' : 'Ich bringe' }}
+			<nx-word size="short" label="Always a label">
+				<input nxInput formControlName="childrenAmount" />
+				<div nxError *ngIf="naturalForm.controls.childrenAmount.hasError('required')">This field is required.</div>
+				<div nxError *ngIf="naturalForm.controls.childrenAmount.hasError('pattern')">Only numbers are allowed.</div>
+			</nx-word>
+			<nx-icon #clickTriggerIcon aria-label="trigger by click" name="info-circle-o" size="s" [nxPopoverTriggerFor]="popoverClick" nxPopoverTrigger="click" tabindex="0" role="button"> </nx-icon>
+			Kinder mit.
+		</div>
+		<span *ngIf="showChildrenPhrase()">Kind kommt!</span>
+	</nx-natural-language-form>
+	<button nxButton type="submit" (click)="openSubmitDialog()" [disabled]="false" class="nx-margin-top-s">Submit</button>
+</form>
+
+<nx-popover #popoverClick>
+	<span>Bitte net :(</span>
+</nx-popover>
+
+<ng-template #submitTemplate>
+	<div nxModalContent>
+		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-m">Your data has been submitted to the backend</h3>
+
+		<p nxCopytext class="nx-margin-bottom-m">Congratulations, this ends the Starter App user journey. We hope you will use the Starter App as a foundation to build something awesome!</p>
+	</div>
+</ng-template>

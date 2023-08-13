@@ -24,14 +24,16 @@ import { NxNaturalLanguageFormModule } from '@aposin/ng-aquila/natural-language-
 
 import { AppComponent } from './app.component'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
-import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
+import { NaturalFormComponent } from './natural-form/natural-form.component'
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http)
 }
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [AppComponent, LanguageSwitcherComponent, NaturalFormComponent],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,

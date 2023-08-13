@@ -2,125 +2,38 @@
 	<div nxLayout="grid">
 		<div nxRow>
 			<div nxCol="2" colOffset="10">
-				<nx-dropdown value="🇩🇪" style="width: 70px; font-size: 25px; float: right">
-					<nx-dropdown-item (click)="changeLanguage('de')" value="🇩🇪"></nx-dropdown-item>
-					<nx-dropdown-item (click)="changeLanguage('gr')" value="🇬🇷"></nx-dropdown-item>
-					<nx-dropdown-item (click)="changeLanguage('ua')" value="🇺🇦"></nx-dropdown-item>
-				</nx-dropdown>
+				<app-language-switcher></app-language-switcher>
 			</div>
 		</div>
 	</div>
-
-	<!-- <div>
-		<span (click)="changeLanguage('de')">🇩🇪</span>
-		<span (click)="changeLanguage('gr')">🇬🇷</span>
-		<span (click)="changeLanguage('ua')">🇺🇦</span>
-	</div> -->
 	<nx-small-stage>
 		<h1 nxHeadline="section">
 			{{ 'HOCHZEIT' | translate }}
 		</h1>
 	</nx-small-stage>
-	<form class="form-example nx-margin-top-s">
-		<div nxLayout="grid">
-			<div nxRow>
-				<div nxCol="12">
-					<nx-natural-language-form [formGroup]="naturalForm">
-						<span *ngIf="plusOneEligable">Ich werde </span>
-						<nx-word size="long" label="Always a label">
-							<nx-dropdown formControlName="hasPlusOne">
-								<nx-dropdown-item value="false">alleine</nx-dropdown-item>
-								<nx-dropdown-item value="true">mit einer weiteren Person</nx-dropdown-item>
-							</nx-dropdown>
-							<div nxError>deng?!</div>
-						</nx-word>
-						<span>kommen</span>
-
-						<span *ngIf="showPlusOnePhrase()">. Meine partnende Person heisst</span>
-						<nx-word *ngIf="showPlusOnePhrase()" size="long" label="Always a label">
-							<!-- <nx-word size="regular" label="Always a label"> -->
-							<input nxInput formControlName="plusOne" />
-							<div nxError>This field is required.</div>
-						</nx-word>
-
-						<span *ngIf="showPlusOnePhrase()">. {{ getPlusOneName() }} ist</span>
-						<nx-word *ngIf="showPlusOnePhrase()" size="long" label="Always a label">
-							<nx-dropdown formControlName="plusOneMealType">
-								<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
-								<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
-								<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
-							</nx-dropdown>
-							<div nxError>Was frisch?.</div>
-						</nx-word>
-
-						<span>. Ich <span *ngIf="showPlusOnePhrase()"> selber</span> bin</span>
-						<nx-word size="long" label="Always a label">
-							<nx-dropdown formControlName="who">
-								<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
-								<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
-								<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
-							</nx-dropdown>
-							<div nxError>Was frisch?.</div>
-						</nx-word>
-
-						<span>{{ showPlusOnePhrase() ? 'Wir' : 'Ich' }} bringen</span>
-						<nx-word size="short" label="Always a label">
-							<input nxInput formControlName="childrenAmount" />
-							<div nxError *ngIf="naturalForm.controls.childrenAmount.hasError('required')">This field is required.</div>
-							<div nxError *ngIf="naturalForm.controls.childrenAmount.hasError('pattern')">Only numbers are allowed.</div>
-						</nx-word>
-						<span>
-							<nx-icon #clickTriggerIcon aria-label="trigger by click" name="info-circle-o" size="s" [nxPopoverTriggerFor]="popoverClick" nxPopoverTrigger="click" tabindex="0" role="button"> </nx-icon>
-							Kinder mit.
-						</span>
-						<nx-popover #popoverClick>
-							<span>Bitte net :(</span>
-						</nx-popover>
-
-						<span *ngIf="showChildrenPhrase()">Ich bin</span>
-					</nx-natural-language-form>
-				</div>
-
-				<div nxRow>
-					<div nxCol="12">
-						<nx-checkbox class="nx-margin-bottom-s" formControlName="consent"
-							>I have read and understood
-							<a nxPlainButton (click)="openConsentDialog()">the disclaimer and conditions.</a>
-						</nx-checkbox>
-
-						<button nxButton type="submit" (click)="openSubmitDialog()" [disabled]="false" class="nx-margin-top-s">Submit</button>
-					</div>
-				</div>
+	<div nxLayout="grid">
+		<div nxRow>
+			<div nxCol="12">
+				<app-natural-form></app-natural-form>
 			</div>
+			<a nxPlainButton (click)="openConsentDialog()">Alternative fuer Kinder</a>
 		</div>
-	</form>
+	</div>
 
 	<footer nx-footer>
 		<nx-footer-copyright> &copy; 😼 </nx-footer-copyright>
 	</footer>
 
-	<nx-popover #popoverEmail>
-		<div style="max-width: 200px">Please enter your email address.</div>
-	</nx-popover>
-
-	<ng-template #consentTemplate>
+	<ng-template #childrenAlternative>
 		<div nxModalContent>
-			<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">Modal with Disclaimer</h3>
+			<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">Wieso keine Kinder?</h3>
 
-			<p nxCopytext class="nx-margin-bottom-s nx-font-weight-bold">Conditions and Disclaimer</p>
+			<p nxCopytext class="nx-margin-bottom-s nx-font-weight-bold">Weil ding</p>
 			<p nxCopytext class="nx-margin-bottom-m">
 				Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et
 				justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
 				duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo duo dolores et ea rebum.
 			</p>
-		</div>
-	</ng-template>
-
-	<ng-template #submitTemplate>
-		<div nxModalContent>
-			<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-m">Your data has been submitted to the backend</h3>
-
-			<p nxCopytext class="nx-margin-bottom-m">Congratulations, this ends the Starter App user journey. We hope you will use the Starter App as a foundation to build something awesome!</p>
 		</div>
 	</ng-template>
 </div>
