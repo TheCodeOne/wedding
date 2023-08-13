@@ -26,14 +26,15 @@ import { AppComponent } from './app.component'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
-import { NaturalFormComponent } from './natural-form/natural-form.component'
+import { NaturalFormComponent } from './natural-form/natural-form.component';
+import { GreetingComponent } from './greeting/greeting.component'
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http)
 }
 
 @NgModule({
-	declarations: [AppComponent, LanguageSwitcherComponent, NaturalFormComponent],
+	declarations: [AppComponent, LanguageSwitcherComponent, NaturalFormComponent, GreetingComponent],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,

@@ -1,6 +1,7 @@
 import { Component, Input, TemplateRef, ViewChild } from '@angular/core'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
+import { getName } from '../utils'
 
 @Component({
 	selector: 'app-natural-form',
@@ -9,12 +10,12 @@ import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
 })
 export class NaturalFormComponent {
 	@ViewChild('submitTemplate') submitTemplateRef!: TemplateRef<any>
-	@Input() guests: any[] = []
+	@Input() guests: any = {}
 
 	naturalForm = this.fb.group({
 		mealType: new FormControl('', [Validators.required]),
 		childrenAmount: new FormControl('', [Validators.pattern('[0-9]*'), Validators.required]),
-		hasPlusOne: new FormControl('', [Validators.required]),
+		hasPlusOne: new FormControl(''),
 		plusOne: this.fb.group({
 			name: new FormControl(''),
 			mealType: new FormControl(''),
@@ -27,7 +28,7 @@ export class NaturalFormComponent {
 	constructor(private readonly fb: FormBuilder, readonly dialogService: NxDialogService) {}
 
 	isSingle(): boolean {
-		return this.guests.length === 1
+		return this.guests.guests?.length === 1
 	}
 
 	showChildrenPhrase(): boolean {
@@ -47,7 +48,6 @@ export class NaturalFormComponent {
 	}
 
 	openSubmitDialog(): void {
-		console.log('as')
 		this.validate()
 		console.log(this.naturalForm)
 		if (!this.naturalForm.valid) return
@@ -57,9 +57,15 @@ export class NaturalFormComponent {
 		})
 	}
 
+	getName(gender: string) {
+		return getName(this.guests, gender)
+	}
+
 	private validate() {
 		Object.values(this.naturalForm.controls).forEach(control => {
 			control?.markAsTouched({ onlySelf: true })
 		})
 	}
 }
+
+// TODO: Match the stuff from the template to the component (mealType for each person etc.)

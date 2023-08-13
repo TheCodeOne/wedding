@@ -12,7 +12,7 @@ import { ApiService } from './services/api.service'
 export class AppComponent implements OnInit {
 	@ViewChild('childrenAlternative') childrenAlternativeTemplateRef!: TemplateRef<any>
 	dialogRef!: NxModalRef<any>
-	private guests: any[] = []
+	private guests: any = {}
 
 	constructor(readonly dialogService: NxDialogService, private api: ApiService) {}
 
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 	}
 
 	async init() {
-		const guests = await this.api.getGuests()
+		this.guests = await this.api.getGuests()
 	}
 
 	getGuests() {

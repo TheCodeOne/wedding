@@ -14,6 +14,11 @@
 	<div nxLayout="grid">
 		<div nxRow>
 			<div nxCol="12">
+				<app-greeting [guests]="getGuests()"></app-greeting>
+			</div>
+		</div>
+		<div nxRow>
+			<div nxCol="12">
 				<app-natural-form [guests]="getGuests()"></app-natural-form>
 			</div>
 			<a nxPlainButton (click)="openConsentDialog()">Alternative fuer Kinder</a>

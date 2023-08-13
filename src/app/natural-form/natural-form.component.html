@@ -1,7 +1,8 @@
 <form class="form-example nx-margin-top-s">
-	<nx-natural-language-form [formGroup]="naturalForm">
+	<nx-natural-language-form [formGroup]="naturalForm" style="padding: 0">
 		<div>
-			<ng-container *ngIf="!isSingle()">
+			<!-- SINGLE -->
+			<ng-container *ngIf="isSingle()">
 				Ich werde
 				<nx-word size="long" label="Always a label">
 					<nx-dropdown formControlName="hasPlusOne">
@@ -29,19 +30,39 @@
 						<div nxError>Was frisch?.</div>
 					</nx-word>
 				</ng-container>
+				Ich {{ showPlusOnePhrase() ? 'selber' : '' }} bin
+				<nx-word size="regular" label="Always a label">
+					<nx-dropdown formControlName="mealType">
+						<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
+						<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
+						<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
+					</nx-dropdown>
+					<div nxError>Was frisch?.</div>
+				</nx-word>
+			</ng-container>
+			<!-- SINGLE END -->
+
+			<ng-container *ngIf="!isSingle()">
+				{{ getName('female') }} ist
+				<nx-word size="regular" label="Always a label">
+					<nx-dropdown formControlName="mealType">
+						<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
+						<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
+						<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
+					</nx-dropdown>
+					<div nxError>Was frisch?.</div> </nx-word
+				>, {{ getName('male') }} ist
+				<nx-word size="regular" label="Always a label">
+					<nx-dropdown formControlName="mealType">
+						<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
+						<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
+						<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
+					</nx-dropdown>
+					<div nxError>Was frisch?.</div> </nx-word
+				>.
 			</ng-container>
 
-			Ich {{ showPlusOnePhrase() ? 'selber' : '' }} bin
-			<nx-word size="long" label="Always a label">
-				<nx-dropdown formControlName="mealType">
-					<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
-					<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
-					<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
-				</nx-dropdown>
-				<div nxError>Was frisch?.</div> </nx-word
-			>.
-
-			{{ showPlusOnePhrase() ? 'Wir bringen' : 'Ich bringe' }}
+			{{ showPlusOnePhrase() || !isSingle() ? 'Wir bringen' : 'Ich bringe' }}
 			<nx-word size="short" label="Always a label">
 				<input nxInput formControlName="childrenAmount" />
 				<div nxError *ngIf="naturalForm.controls.childrenAmount.hasError('required')">This field is required.</div>
