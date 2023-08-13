@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core'
+import { Component, Input, TemplateRef, ViewChild } from '@angular/core'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
 
@@ -9,6 +9,7 @@ import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
 })
 export class NaturalFormComponent {
 	@ViewChild('submitTemplate') submitTemplateRef!: TemplateRef<any>
+	@Input() guests: any[] = []
 
 	naturalForm = this.fb.group({
 		mealType: new FormControl('', [Validators.required]),
@@ -24,6 +25,10 @@ export class NaturalFormComponent {
 	hasPlusOne: boolean = true
 
 	constructor(private readonly fb: FormBuilder, readonly dialogService: NxDialogService) {}
+
+	isSingle(): boolean {
+		return this.guests.length === 1
+	}
 
 	showChildrenPhrase(): boolean {
 		return !!Number(this.naturalForm.get('childrenAmount')?.value)

@@ -1,32 +1,34 @@
 <form class="form-example nx-margin-top-s">
 	<nx-natural-language-form [formGroup]="naturalForm">
-		<div *ngIf="plusOneEligable">
-			Ich werde
-			<nx-word size="long" label="Always a label">
-				<nx-dropdown formControlName="hasPlusOne">
-					<nx-dropdown-item value="false">alleine</nx-dropdown-item>
-					<nx-dropdown-item value="true">mit einer weiteren Person</nx-dropdown-item>
-				</nx-dropdown>
-				<div nxError>deng?!</div>
-			</nx-word>
-			kommen.
-
-			<ng-container formGroupName="plusOne" *ngIf="showPlusOnePhrase()">
-				Meine partnende Person heisst
+		<div>
+			<ng-container *ngIf="!isSingle()">
+				Ich werde
 				<nx-word size="long" label="Always a label">
-					<input nxInput formControlName="name" />
-					<div nxError>This field is required.</div>
-				</nx-word>
-
-				. {{ getPlusOneName() }} ist
-				<nx-word size="long" label="Always a label">
-					<nx-dropdown formControlName="mealType">
-						<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
-						<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
-						<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
+					<nx-dropdown formControlName="hasPlusOne">
+						<nx-dropdown-item value="false">alleine</nx-dropdown-item>
+						<nx-dropdown-item value="true">mit einer weiteren Person</nx-dropdown-item>
 					</nx-dropdown>
-					<div nxError>Was frisch?.</div>
+					<div nxError>deng?!</div>
 				</nx-word>
+				kommen.
+
+				<ng-container formGroupName="plusOne" *ngIf="showPlusOnePhrase()">
+					Meine partnende Person heisst
+					<nx-word size="long" label="Always a label">
+						<input nxInput formControlName="name" />
+						<div nxError>This field is required.</div>
+					</nx-word>
+
+					. {{ getPlusOneName() }} ist
+					<nx-word size="long" label="Always a label">
+						<nx-dropdown formControlName="mealType">
+							<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
+							<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
+							<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
+						</nx-dropdown>
+						<div nxError>Was frisch?.</div>
+					</nx-word>
+				</ng-container>
 			</ng-container>
 
 			Ich {{ showPlusOnePhrase() ? 'selber' : '' }} bin
