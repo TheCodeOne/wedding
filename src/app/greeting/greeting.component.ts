@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { getName } from '../utils'
+import { getGuestName } from '../utils'
 
 @Component({
 	selector: 'app-greeting',
@@ -10,7 +10,7 @@ export class GreetingComponent {
 	@Input() guests: any = {}
 
 	getName(gender: string) {
-		return getName(this.guests, gender)
+		return getGuestName(this.guests, gender)
 	}
 
 	hasGender(gender: string) {

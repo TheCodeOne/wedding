@@ -7,11 +7,11 @@ const mockData = {
 			gender: 'male',
 			mealType: 'vegan',
 		},
-		{
-			name: 'Luise',
-			gender: 'female',
-			mealType: 'vegan',
-		},
+		// {
+		// 	name: 'Luise',
+		// 	gender: 'female',
+		// 	mealType: 'vegan',
+		// },
 	],
 }
 

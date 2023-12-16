@@ -12,7 +12,7 @@ import { ApiService } from './services/api.service'
 export class AppComponent implements OnInit {
 	@ViewChild('childrenAlternative') childrenAlternativeTemplateRef!: TemplateRef<any>
 	dialogRef!: NxModalRef<any>
-	private guests: any = {}
+	private _guests: any = {}
 
 	constructor(readonly dialogService: NxDialogService, private api: ApiService) {}
 
@@ -21,11 +21,11 @@ export class AppComponent implements OnInit {
 	}
 
 	async init() {
-		this.guests = await this.api.getGuests()
+		this._guests = await this.api.getGuests()
 	}
 
 	getGuests() {
-		return this.guests
+		return this._guests
 	}
 
 	openConsentDialog(): void {

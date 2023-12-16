@@ -1,10 +1,19 @@
 <form class="form-example nx-margin-top-s">
 	<nx-natural-language-form [formGroup]="naturalForm" style="padding: 0">
 		<div>
+			Ich / wir werden zur Feier
+			<nx-word size="regular" label="attend">
+				<nx-dropdown formControlName="attend">
+					<nx-dropdown-item value="{{ true }}">kommen</nx-dropdown-item>
+					<nx-dropdown-item value="{{ false }}">leider nicht kommen koennen</nx-dropdown-item>
+				</nx-dropdown>
+				<div nxError>deng?!</div>
+			</nx-word>
+
 			<!-- SINGLE -->
-			<ng-container *ngIf="isSingle()">
+			<ng-container *ngIf="isSingle() && willAttend">
 				Ich werde
-				<nx-word size="long" label="Always a label">
+				<nx-word size="long" label="plusOne">
 					<nx-dropdown formControlName="hasPlusOne">
 						<nx-dropdown-item value="false">alleine</nx-dropdown-item>
 						<nx-dropdown-item value="true">mit einer weiteren Person</nx-dropdown-item>
@@ -15,13 +24,13 @@
 
 				<ng-container formGroupName="plusOne" *ngIf="showPlusOnePhrase()">
 					Meine partnende Person heisst
-					<nx-word size="long" label="Always a label">
+					<nx-word size="long" label="name">
 						<input nxInput formControlName="name" />
 						<div nxError>This field is required.</div>
 					</nx-word>
 
 					. {{ getPlusOneName() }} ist
-					<nx-word size="long" label="Always a label">
+					<nx-word size="long" label="mealType">
 						<nx-dropdown formControlName="mealType">
 							<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
 							<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
@@ -31,8 +40,8 @@
 					</nx-word>
 				</ng-container>
 				Ich {{ showPlusOnePhrase() ? 'selber' : '' }} bin
-				<nx-word size="regular" label="Always a label">
-					<nx-dropdown formControlName="mealType">
+				<nx-word size="regular" label="mealTypeFemale">
+					<nx-dropdown formControlName="mealTypeFemale">
 						<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
 						<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
 						<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
@@ -42,18 +51,18 @@
 			</ng-container>
 			<!-- SINGLE END -->
 
-			<ng-container *ngIf="!isSingle()">
+			<ng-container *ngIf="!isSingle() && willAttend">
 				{{ getName('female') }} ist
-				<nx-word size="regular" label="Always a label">
-					<nx-dropdown formControlName="mealType">
+				<nx-word size="regular" label="mealTypeFemale">
+					<nx-dropdown formControlName="mealTypeFemale">
 						<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
 						<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
 						<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
 					</nx-dropdown>
 					<div nxError>Was frisch?.</div> </nx-word
 				>, {{ getName('male') }} ist
-				<nx-word size="regular" label="Always a label">
-					<nx-dropdown formControlName="mealType">
+				<nx-word size="regular" label="mealTypeMale">
+					<nx-dropdown formControlName="mealTypeMale">
 						<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
 						<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
 						<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
@@ -61,17 +70,7 @@
 					<div nxError>Was frisch?.</div> </nx-word
 				>.
 			</ng-container>
-
-			{{ showPlusOnePhrase() || !isSingle() ? 'Wir bringen' : 'Ich bringe' }}
-			<nx-word size="short" label="Always a label">
-				<input nxInput formControlName="childrenAmount" />
-				<div nxError *ngIf="naturalForm.controls.childrenAmount.hasError('required')">This field is required.</div>
-				<div nxError *ngIf="naturalForm.controls.childrenAmount.hasError('pattern')">Only numbers are allowed.</div>
-			</nx-word>
-			<nx-icon #clickTriggerIcon aria-label="trigger by click" name="info-circle-o" size="s" [nxPopoverTriggerFor]="popoverClick" nxPopoverTrigger="click" tabindex="0" role="button"> </nx-icon>
-			Kinder mit.
 		</div>
-		<span *ngIf="showChildrenPhrase()">Kind kommt!</span>
 	</nx-natural-language-form>
 	<button nxButton type="submit" (click)="openSubmitDialog()" [disabled]="false" class="nx-margin-top-s">Submit</button>
 </form>
