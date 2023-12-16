@@ -13,18 +13,6 @@ const mockData = {
 			mealType: 'vegan',
 		},
 	],
-	spouses: [
-		{
-			name: 'Hans',
-			gender: 'male',
-			age: 1,
-		},
-		{
-			name: 'Luise',
-			gender: 'male',
-			age: 2,
-		},
-	],
 }
 
 @Injectable({
