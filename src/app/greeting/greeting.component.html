@@ -1,5 +1,5 @@
 <h2>
-	<span *ngIf="hasGender('female')">Liebe {{ getName('female') }},</span>
-	<span *ngIf="hasGender('male')"> Lieber {{ getName('male') }}, </span>
+	<span *ngIf="hasGender('female')">{{ 'liebe' | translate }} {{ getName('female') }},</span>
+	<span *ngIf="hasGender('male')"> {{ 'lieber' | translate }} {{ getName('male') }}, </span>
 </h2>
 <h3>Was geht wieso hier so, blablabla Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse repellat deleniti cumque eveniet inventore corrupti doloremque. Facilis tempora architecto ex at repellendus quasi sapiente officia illum dicta, delectus explicabo deserunt.</h3>
