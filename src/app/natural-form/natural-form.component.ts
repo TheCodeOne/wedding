@@ -14,13 +14,8 @@ export class NaturalFormComponent implements OnInit {
 
 	naturalForm: FormGroup = this.fb.group({
 		attend: new FormControl(null, [Validators.required]),
-		mealTypeMale: new FormControl(null, [Validators.required]),
-		mealTypeFemale: new FormControl(null, [Validators.required]),
 		hasPlusOne: new FormControl(null, this.getPlusOneValidation()),
-		plusOne: this.fb.group({
-			name: new FormControl(null, [Validators.required]),
-			mealType: new FormControl(null, [Validators.required]),
-		}),
+		plusOne: new FormControl(null, [Validators.required]),
 	})
 
 	dialogRef!: NxModalRef<any>
@@ -31,9 +26,8 @@ export class NaturalFormComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.naturalForm?.get('hasPlusOne')?.valueChanges.subscribe(() => {
-			this.naturalForm?.get('plusOne')?.get('name')?.setValue(null)
+			this.naturalForm?.get('plusOne')?.setValue(null)
 			this.naturalForm?.get('plusOne')?.addValidators(this.getPlusOneValidation())
-			this.naturalForm?.get('plusOne')?.get('name')?.addValidators(this.getPlusOneValidation())
 
 			this.naturalForm.updateValueAndValidity()
 		})
@@ -66,8 +60,8 @@ export class NaturalFormComponent implements OnInit {
 	}
 
 	openSubmitDialog(): void {
-		this.validate()
-		if (!this.naturalForm.valid) return
+		if (!this.isValid()) return
+		console.log('HIER DANN CALL')
 		this.dialogRef = this.dialogService.open(this.submitTemplateRef, {
 			ariaLabel: 'The final modal of the Starter App',
 			showCloseIcon: false,
@@ -78,14 +72,18 @@ export class NaturalFormComponent implements OnInit {
 		return getGuestName(this.guests, gender)
 	}
 
-	private validate() {
-		Object.values(this.naturalForm.controls).forEach(control => {
-			control?.markAsTouched({ onlySelf: true })
-		})
-		this.naturalForm.get('plusOne')?.markAsTouched({ onlySelf: true })
-		this.naturalForm.get('plusOne')?.get('name')?.markAsTouched({ onlySelf: true })
-		this.naturalForm.get('plusOne')?.get('mealType')?.markAsTouched({ onlySelf: true })
-		console.log(this.naturalForm)
+	private isValid(): boolean {
+		if (this.naturalForm.get('attend')?.value === 'false') {
+			return true
+		} else if (this.naturalForm.get('attend')?.value === 'true' && this.naturalForm.get('hasPlusOne')?.value === 'false') {
+			return true
+		} else if (this.naturalForm.get('attend')?.value === 'true' && this.naturalForm.get('hasPlusOne')?.value === 'true' && this.naturalForm.get('plusOne')?.value) {
+			return true
+		} else if (this.naturalForm.get('attend')?.value === 'true' && this.naturalForm.get('hasPlusOne')?.value === null) {
+			return true
+		}
+
+		return false
 	}
 
 	private getPlusOneValidation() {

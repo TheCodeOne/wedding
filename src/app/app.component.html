@@ -1,12 +1,13 @@
-<div class="starter-app" *ngIf="showContent">
+<div *ngIf="showContent && !isLoading" [@fadeIn]="false">
 	<div nxLayout="grid">
 		<div nxRow>
-			<div nxCol="2" colOffset="10">
+			<div nxCol="6" colOffset="0" style="cursor: pointer" (click)="toggleLoadingAnimation()">{{ loadingAnimationText }}</div>
+			<div nxCol="2" colOffset="4">
 				<app-language-switcher></app-language-switcher>
 			</div>
 		</div>
 	</div>
-	<nx-small-stage>
+	<nx-small-stage class="stage">
 		<h1 nxHeadline="section">
 			{{ 'hochzeit' | translate }}
 		</h1>
@@ -21,29 +22,22 @@
 			<div nxCol="12">
 				<app-natural-form [guests]="getGuests()"></app-natural-form>
 			</div>
-			<a nxPlainButton (click)="openConsentDialog()">Was ist mit unseren Kindern?</a>
+		</div>
+		<div nxRow>
+			<div nxCol="12">
+				<div><a nxPlainButton (click)="openModal(ModalType.HOTEL)">Infos zum Hotel</a></div>
+				<div><a nxPlainButton (click)="openModal(ModalType.BEST_MAN_MAID_OF_HONOR)">Infos zu den Trauzeug:Innen</a></div>
+				<div><a nxPlainButton (click)="openModal(ModalType.CHILDREN)">Was ist mit unseren Kindern?</a></div>
+			</div>
 		</div>
 	</div>
 
 	<footer nx-footer>
 		<nx-footer-copyright> &copy; 😼 </nx-footer-copyright>
 	</footer>
-
-	<ng-template #childrenAlternative>
-		<div nxModalContent>
-			<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">Wieso keine Kinder?</h3>
-
-			<p nxCopytext class="nx-margin-bottom-s nx-font-weight-bold">Weil ding</p>
-			<p nxCopytext class="nx-margin-bottom-m">
-				Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et
-				justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-				duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo duo dolores et ea rebum.
-			</p>
-		</div>
-	</ng-template>
 </div>
 
-<div *ngIf="!showContent" class="container">
+<div *ngIf="!showContent && !isLoading" [@fadeIn]="true" class="container">
 	<div style="width: 100%; height: 0; padding-bottom: 43%">
 		<h1 nxHeadline="section" style="text-align: center">404</h1>
 		<img class="media_gif__MBeQG" style="aspect-ratio: 480/206" src="https://i.giphy.com/3o84sF21zQYacFcl68.webp" alt="" width="100%" />
@@ -53,3 +47,42 @@
 		</p>
 	</div>
 </div>
+
+<ng-template #CHILDREN>
+	<div nxModalContent>
+		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">Wieso keine Kinder?</h3>
+
+		<p nxCopytext class="nx-margin-bottom-s nx-font-weight-bold">Weil ding</p>
+		<p nxCopytext class="nx-margin-bottom-m">
+			Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo
+			duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+			dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo duo dolores et ea rebum.
+		</p>
+	</div>
+</ng-template>
+
+<ng-template #HOTEL>
+	<div nxModalContent>
+		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">Hier Hotelinfos?</h3>
+
+		<p nxCopytext class="nx-margin-bottom-s nx-font-weight-bold">BNB in Cannstatt gegenueber</p>
+		<p nxCopytext class="nx-margin-bottom-m">
+			Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo
+			duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+			dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo duo dolores et ea rebum.
+		</p>
+	</div>
+</ng-template>
+
+<ng-template #BEST_MAN_MAID_OF_HONOR>
+	<div nxModalContent>
+		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">Hier Trauzeugen ZEUGS?</h3>
+
+		<p nxCopytext class="nx-margin-bottom-s nx-font-weight-bold">BNB in Cannstatt gegenueber</p>
+		<p nxCopytext class="nx-margin-bottom-m">
+			Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo
+			duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+			dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo duo dolores et ea rebum.
+		</p>
+	</div>
+</ng-template>
