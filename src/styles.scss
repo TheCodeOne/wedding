@@ -6,3 +6,18 @@
 .nx-dropdown__panel {
 	min-width: 20px;
 }
+
+body:after {
+	content: '';
+	background-image: url('/assets/images/sofia_and_dimi.jpeg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+	width: 100vw;
+	opacity: 0.3;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
