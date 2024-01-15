@@ -1,11 +1,8 @@
-import { Component, TemplateRef, ViewChild, ElementRef, AfterViewInit, OnDestroy, OnInit } from '@angular/core'
-import { FormBuilder, FormControl, Validators } from '@angular/forms'
-import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
-import { TranslateService } from '@ngx-translate/core'
-import { ApiService } from './services/api.service'
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
-import { BehaviorSubject, lastValueFrom } from 'rxjs'
 import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/message'
+import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
+import { ApiService } from './services/api.service'
 
 @Component({
 	selector: 'app-root',
@@ -15,6 +12,7 @@ import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/m
 export class AppComponent implements OnInit {
 	@ViewChild('childrenAlternative') childrenAlternativeTemplateRef!: TemplateRef<any>
 	dialogRef!: NxModalRef<any>
+	showContent: boolean = false
 	private _guests: any = {}
 
 	constructor(readonly dialogService: NxDialogService, private api: ApiService, private activatedRoute: ActivatedRoute, private messageToastService: NxMessageToastService) {
@@ -33,14 +31,14 @@ export class AppComponent implements OnInit {
 		// zwei : 5b975dc4-d606-4331-bd44-eeb37b8ed248
 		try {
 			this._guests = await this.api.getGuests(uuid)
+			this.showContent = true
 			console.log('loaded guests', this._guests)
 		} catch (error) {
 			const myCustomOptions: NxMessageToastConfig = {
-				duration: 5000,
+				duration: 0,
 				context: 'info',
-				announcementMessage: 'Yay, you see a success message toast',
 			}
-			this.messageToastService.open('Something went wrong ... please try again later', myCustomOptions)
+			this.messageToastService.open('Invitation link is not know. Contact Sofia & Dimi', myCustomOptions)
 			console.log(error)
 		}
 	}

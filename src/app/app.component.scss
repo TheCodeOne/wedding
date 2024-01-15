@@ -14,3 +14,15 @@ nx-icon:hover {
 nx-icon.cdk-mouse-focused {
 	outline: none;
 }
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 80vh;
+}
+
+.container div {
+	width: 100px;
+	height: 100px;
+}

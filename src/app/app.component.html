@@ -1,4 +1,4 @@
-<div class="starter-app">
+<div class="starter-app" *ngIf="showContent">
 	<div nxLayout="grid">
 		<div nxRow>
 			<div nxCol="2" colOffset="10">
@@ -41,4 +41,15 @@
 			</p>
 		</div>
 	</ng-template>
+</div>
+
+<div *ngIf="!showContent" class="container">
+	<div style="width: 100%; height: 0; padding-bottom: 43%">
+		<h1 nxHeadline="section" style="text-align: center">404</h1>
+		<img class="media_gif__MBeQG" style="aspect-ratio: 480/206" src="https://i.giphy.com/3o84sF21zQYacFcl68.webp" alt="" width="100%" />
+		<p>
+			via GIPHY <br />
+			(https://giphy.com/gifs/starwars-movie-star-wars-3o84sF21zQYacFcl68)
+		</p>
+	</div>
 </div>
