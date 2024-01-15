@@ -10,7 +10,7 @@ import { getGuestName } from '../utils'
 })
 export class NaturalFormComponent implements OnInit {
 	@ViewChild('submitTemplate') submitTemplateRef!: TemplateRef<any>
-	@Input() guests: any = {}
+	@Input() guests: any
 
 	naturalForm: FormGroup = this.fb.group({
 		attend: new FormControl(null, [Validators.required]),
@@ -32,16 +32,17 @@ export class NaturalFormComponent implements OnInit {
 	ngOnInit(): void {
 		this.naturalForm?.get('hasPlusOne')?.valueChanges.subscribe(() => {
 			this.naturalForm?.get('plusOne')?.get('name')?.setValue(null)
-			this.naturalForm?.get('plusOne')?.get('mealType')?.setValue(null)
 			this.naturalForm?.get('plusOne')?.addValidators(this.getPlusOneValidation())
 			this.naturalForm?.get('plusOne')?.get('name')?.addValidators(this.getPlusOneValidation())
-			this.naturalForm?.get('plusOne')?.get('mealType')?.addValidators(this.getPlusOneValidation())
-			this.naturalForm?.get('mealTypeMale')?.removeValidators([Validators.required])
-			console.log(this.showPlusOnePhrase())
-			this.naturalForm?.get('mealTypeMale')?.addValidators(this.hasPlusOne ? [] : [Validators.required])
 
 			this.naturalForm.updateValueAndValidity()
 		})
+		setTimeout(() => {
+			if (!this.guests?.guests) return
+			console.log(this.guests?.guests[0].willAttend)
+			this.naturalForm?.get('attend')?.setValue(`${this.guests?.guests[0].willAttend}`)
+			this.naturalForm.updateValueAndValidity()
+		}, 200)
 	}
 
 	get willAttend() {
@@ -88,9 +89,6 @@ export class NaturalFormComponent implements OnInit {
 	}
 
 	private getPlusOneValidation() {
-		console.log(this.showPlusOnePhrase())
 		return this.showPlusOnePhrase() ? [Validators.required] : []
 	}
 }
-
-// TODO: Match the stuff from the template to the component (mealType for each person etc.)

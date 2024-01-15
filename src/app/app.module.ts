@@ -24,9 +24,9 @@ import { NxNaturalLanguageFormModule } from '@aposin/ng-aquila/natural-language-
 
 import { AppComponent } from './app.component'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
-import { NaturalFormComponent } from './natural-form/natural-form.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component'
+import { NaturalFormComponent } from './natural-form/natural-form.component'
 import { GreetingComponent } from './greeting/greeting.component'
 
 export function HttpLoaderFactory(http: HttpClient) {

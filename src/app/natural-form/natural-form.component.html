@@ -3,7 +3,7 @@
 		<div>
 			Ich / wir werden zur Feier
 			<nx-word size="regular" label="attend">
-				<nx-dropdown formControlName="attend">
+				<nx-dropdown formControlName="attend" style="width: 375px">
 					<nx-dropdown-item value="{{ true }}">kommen</nx-dropdown-item>
 					<nx-dropdown-item value="{{ false }}">leider nicht kommen koennen</nx-dropdown-item>
 				</nx-dropdown>
@@ -28,56 +28,14 @@
 						<input nxInput formControlName="name" />
 						<div nxError>This field is required.</div>
 					</nx-word>
-
-					. {{ getPlusOneName() }} ist
-					<nx-word size="long" label="mealType">
-						<nx-dropdown formControlName="mealType">
-							<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
-							<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
-							<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
-						</nx-dropdown>
-						<div nxError>Was frisch?.</div>
-					</nx-word>
+					.
 				</ng-container>
-				Ich {{ showPlusOnePhrase() ? 'selber' : '' }} bin
-				<nx-word size="regular" label="mealTypeFemale">
-					<nx-dropdown formControlName="mealTypeFemale">
-						<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
-						<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
-						<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
-					</nx-dropdown>
-					<div nxError>Was frisch?.</div>
-				</nx-word>
 			</ng-container>
 			<!-- SINGLE END -->
-
-			<ng-container *ngIf="!isSingle() && willAttend">
-				{{ getName('female') }} ist
-				<nx-word size="regular" label="mealTypeFemale">
-					<nx-dropdown formControlName="mealTypeFemale">
-						<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
-						<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
-						<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
-					</nx-dropdown>
-					<div nxError>Was frisch?.</div> </nx-word
-				>, {{ getName('male') }} ist
-				<nx-word size="regular" label="mealTypeMale">
-					<nx-dropdown formControlName="mealTypeMale">
-						<nx-dropdown-item value="vegan">vegan</nx-dropdown-item>
-						<nx-dropdown-item value="vegetarian">vegetarier</nx-dropdown-item>
-						<nx-dropdown-item value="all">allesesser</nx-dropdown-item>
-					</nx-dropdown>
-					<div nxError>Was frisch?.</div> </nx-word
-				>.
-			</ng-container>
 		</div>
 	</nx-natural-language-form>
 	<button nxButton type="submit" (click)="openSubmitDialog()" [disabled]="false" class="nx-margin-top-s">Submit</button>
 </form>
-
-<nx-popover #popoverClick>
-	<span>Bitte net :(</span>
-</nx-popover>
 
 <ng-template #submitTemplate>
 	<div nxModalContent>

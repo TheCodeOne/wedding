@@ -1,27 +1,19 @@
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-
-const mockData = {
-	guests: [
-		{
-			name: 'Hans',
-			gender: 'male',
-			mealType: 'vegan',
-		},
-		// {
-		// 	name: 'Luise',
-		// 	gender: 'female',
-		// 	mealType: 'vegan',
-		// },
-	],
-}
+import { BehaviorSubject, lastValueFrom } from 'rxjs'
 
 @Injectable({
 	providedIn: 'root',
 })
 export class ApiService {
-	constructor() {}
+	private guests = new BehaviorSubject<any>({})
+	currentGuests = this.guests.asObservable()
 
-	getGuests() {
-		return mockData
+	constructor(private http: HttpClient) {}
+
+	async getGuests(uuid: string) {
+		const guests = await lastValueFrom(this.http.get(`http://localhost:3000/guests/${uuid}`))
+		this.guests.next(guests)
+		return guests
 	}
 }
