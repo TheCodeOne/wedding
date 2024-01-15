@@ -8,8 +8,11 @@ import { TranslateService } from '@ngx-translate/core'
 })
 export class LanguageSwitcherComponent {
 	constructor(private translate: TranslateService) {
+		const userLang = navigator.language.split('-')[0]
+		console.log(userLang)
+
 		translate.setDefaultLang('de')
-		translate.use('de')
+		translate.use(userLang)
 	}
 	changeLanguage(key: string): void {
 		this.translate.use(key)
