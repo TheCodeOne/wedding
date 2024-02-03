@@ -1,7 +1,9 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
-import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
 import { getGuestName } from '../utils'
+import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/message'
+import { debounceTime } from 'rxjs/internal/operators/debounceTime'
+import { ApiService } from '../services/api.service'
 
 @Component({
 	selector: 'app-natural-form',
@@ -18,11 +20,10 @@ export class NaturalFormComponent implements OnInit {
 		plusOne: new FormControl(null, [Validators.required]),
 	})
 
-	dialogRef!: NxModalRef<any>
 	plusOneEligable: boolean = true
 	hasPlusOne: boolean = true
 
-	constructor(private readonly fb: FormBuilder, readonly dialogService: NxDialogService) {}
+	constructor(private readonly fb: FormBuilder, private toastService: NxMessageToastService, private apiService: ApiService) {}
 
 	ngOnInit(): void {
 		this.naturalForm?.get('hasPlusOne')?.valueChanges.subscribe(() => {
@@ -33,8 +34,13 @@ export class NaturalFormComponent implements OnInit {
 		})
 
 		if (!this.guests?.guests) return
-		this.naturalForm?.get('attend')?.setValue(`${this.guests?.guests[0].willAttend}`)
+		this.naturalForm?.get('attend')?.setValue(`${this.guests?.willAttend}`)
+		if (this.guests?.hasPlusOne !== null) this.naturalForm?.get('hasPlusOne')?.setValue(`${this.guests?.hasPlusOne}`)
+		if (this.guests?.plusOne !== null) this.naturalForm?.get('plusOne')?.setValue(`${this.guests?.plusOne}`)
 		this.naturalForm.updateValueAndValidity()
+		this.naturalForm?.valueChanges.pipe(debounceTime(1000)).subscribe(() => {
+			this.intentSubmit()
+		})
 	}
 
 	get willAttend() {
@@ -53,17 +59,24 @@ export class NaturalFormComponent implements OnInit {
 		return this.naturalForm.get('plusOne')!.value?.name || ''
 	}
 
-	closeDialog() {
-		this.dialogRef.close()
-	}
-
-	openSubmitDialog(): void {
+	async intentSubmit() {
 		if (!this.isValid()) return
-		console.log('HIER DANN CALL')
-		this.dialogRef = this.dialogService.open(this.submitTemplateRef, {
-			ariaLabel: 'The final modal of the Starter App',
-			showCloseIcon: false,
-		})
+		try {
+			const myCustomOptions: NxMessageToastConfig = {
+				duration: 3000,
+				context: 'success',
+			}
+			console.log(this.naturalForm.value)
+			await this.apiService.updateGuests(this.guests.uuid, this.naturalForm.value)
+			this.toastService.open('Danke fuer deine Rueckmeldung 😊', myCustomOptions)
+		} catch (error) {
+			const myCustomOptions: NxMessageToastConfig = {
+				duration: 0,
+				context: 'info',
+			}
+			this.toastService.open('Something went wrong! Contact Sofia or Dimi 🤷‍♀️', myCustomOptions)
+			console.log(error)
+		}
 	}
 
 	getName(gender: string) {

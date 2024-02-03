@@ -36,7 +36,7 @@ export class AppComponent {
 	readonly ModalType = ModalType
 	private _guests: any = {}
 
-	constructor(readonly dialogService: NxDialogService, private api: ApiService, private activatedRoute: ActivatedRoute, private router: Router, private messageToastService: NxMessageToastService) {
+	constructor(readonly dialogService: NxDialogService, private api: ApiService, private activatedRoute: ActivatedRoute, private messageToastService: NxMessageToastService) {
 		this.finalQueryParams$.subscribe(params => {
 			const uuid = params['uuid']
 			if (uuid) {

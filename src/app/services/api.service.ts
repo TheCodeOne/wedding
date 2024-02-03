@@ -8,10 +8,28 @@ const FAKE_GUESTS = {
 		{
 			name: 'Dimitrios Singlekonias',
 			gender: 'MALE',
-			willAttend: true,
 		},
 	],
+	willAttend: true,
 	isPlusOneEligable: true,
+}
+
+interface Guests {
+	uuid: string
+	guests: [
+		{
+			name: string
+			gender: string
+		}
+	]
+	willAttend: boolean
+	isPlusOneEligable: boolean
+}
+
+interface UpdateGuests {
+	attend: string
+	plusOne?: string
+	hasPlusOne: string
 }
 
 @Injectable({
@@ -23,10 +41,21 @@ export class ApiService {
 
 	constructor(private http: HttpClient) {}
 
-	async getGuests(uuid: string) {
-		const guests = await lastValueFrom(this.http.get(`http://localhost:3000/guests/${uuid}`))
+	async getGuests(uuid: string): Promise<Guests> {
+		const guests: Guests = (await lastValueFrom(this.http.get(`http://localhost:3000/guests/${uuid}`))) as Guests
 		// const guests = FAKE_GUESTS
 		this.guests.next(guests)
 		return guests
+	}
+
+	async updateGuests(uuid: string, guests: UpdateGuests) {
+		const { plusOne, hasPlusOne, attend: willAttend } = guests
+		await lastValueFrom(
+			this.http.patch(`http://localhost:3000/guests/${uuid}`, {
+				willAttend: willAttend === 'true',
+				...(plusOne && { plusOne }),
+				...(hasPlusOne && { hasPlusOne: hasPlusOne === 'true' }),
+			})
+		)
 	}
 }
