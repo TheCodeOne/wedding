@@ -1,9 +1,10 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core'
-import { ActivatedRoute, Params } from '@angular/router'
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core'
+import { ActivatedRoute, NavigationEnd, Params, Router, RouterEvent } from '@angular/router'
 import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/message'
 import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
 import { ApiService } from './services/api.service'
 import { AnimationTriggerMetadata, animate, style, transition, trigger } from '@angular/animations'
+import { Observable, merge, filter, map } from 'rxjs'
 
 enum ModalType {
 	CHILDREN = 'CHILDREN',
@@ -26,16 +27,23 @@ export class AppComponent {
 	@ViewChild(`${ModalType.HOTEL}`) hotelTemplateRef!: TemplateRef<any>
 	@ViewChild(`${ModalType.BEST_MAN_MAID_OF_HONOR}`) bestManAndMaidOfHonorTemplateRef!: TemplateRef<any>
 	dialogRef!: NxModalRef<any>
-	showContent: boolean = false
+	showContent = false
 	isLoading = true
+	isStartingAnimation = false
+	audio = new Audio()
+	isAudioPlaying = false
+	isAudioLoaded = false
 	readonly ModalType = ModalType
 	private _guests: any = {}
 
-	constructor(readonly dialogService: NxDialogService, private api: ApiService, private activatedRoute: ActivatedRoute, private messageToastService: NxMessageToastService) {
-		this.activatedRoute.queryParams.subscribe((params: Params) => {
+	constructor(readonly dialogService: NxDialogService, private api: ApiService, private activatedRoute: ActivatedRoute, private router: Router, private messageToastService: NxMessageToastService) {
+		this.finalQueryParams$.subscribe(params => {
 			const uuid = params['uuid']
 			if (uuid) {
 				this.init(uuid)
+			} else {
+				this.isLoading = false
+				this.showContent = false
 			}
 		})
 	}
@@ -54,12 +62,16 @@ export class AppComponent {
 		// zwei : 5b975dc4-d606-4331-bd44-eeb37b8ed248
 		try {
 			this._guests = await this.api.getGuests(uuid)
-			if (localStorage.getItem('disableLoadingAnimation') !== 'true') {
-				await this.sleep(3000)
-			}
-			this.showContent = true
-			this.isLoading = false
 			console.log('loaded guests', this._guests)
+			if (localStorage.getItem('disableLoadingAnimation') !== 'true') {
+				document.body.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/assets/images/sofia_and_dimi.jpeg')"
+				this.isStartingAnimation = true
+				await this.sleep(7000)
+			}
+			this.resetScene()
+			this.showContent = true
+			this.isStartingAnimation = false
+			this.isLoading = false
 		} catch (error) {
 			const myCustomOptions: NxMessageToastConfig = {
 				duration: 0,
@@ -92,5 +104,38 @@ export class AppComponent {
 
 	private sleep(ms: number) {
 		return new Promise(resolve => setTimeout(resolve, ms))
+	}
+
+	toggleAudio() {
+		if (this.audio.paused) {
+			if (!this.isAudioLoaded) {
+				this.audio.src = '/assets/Bridal-chorus.wav'
+				this.audio.load()
+				this.isAudioLoaded = true
+			}
+			this.audio.play()
+			this.isAudioPlaying = true
+		} else {
+			this.audio.pause()
+			this.isAudioPlaying = false
+		}
+	}
+
+	private get finalQueryParams$(): Observable<Params> {
+		return merge(
+			// get urls with query params like /test?project=test
+			this.activatedRoute.queryParams.pipe(filter(params => Object.keys(params).length > 0)),
+			// get urls without query params like /test
+			this.activatedRoute.queryParams.pipe(
+				filter(() => !(window.location.href || '').includes('?')),
+				map(() => ({}))
+			)
+		)
+	}
+
+	private resetScene() {
+		// remove background image from body
+		document.body.style.backgroundImage = 'none'
+		document.body.style.opacity = '1'
 	}
 }

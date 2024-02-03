@@ -1,5 +1,54 @@
 {
-  "hochzeit": "Hochzeit",
   "liebe": "Liebe",
-  "lieber": "Lieber"
+  "lieber": "Lieber",
+  "euch": "Euch",
+  "dich": "Dich",
+  "title": {
+    "sofiaAndDimi": "Sofia & Dimi",
+    "date": "01.06.2024",
+    "text": "Einladung"
+  },
+  "greeting": {
+    "intro": "Wir laden euch / Dich herzlich dazu ein, mit uns am 01.06.2024 unsere Hochzeit zu feiern.",
+    "intro2": "Die Standesamtliche Trauung findet um 15:30 Uhr im Trausaal Stuttgart-Bad Cannstatt, Marktplatz 10,70372 Stuttgart, statt. Nach anschließendem Anstoßen vor dem Standesamt begeben wir uns gemeinsam zur Cantine Royale, Mercedesstraße 3, 70372 Stuttgart, wo bis 03:00 Uhr weiter gefeiert wird.",
+    "intro3": "Bitte gib/gebt uns bis 30.03.2024 Bescheid, ob Du/ihr kommt und ob Du/ihr Allergien hast/habt.",
+    "wo": "Mercedesstraße 3, 70372 Stuttgart",
+    "wann": "01.06.2024, 17:00 Uhr",
+    "geschenke": {
+      "text": "Geschenke? Wenn ihr uns etwas schenken möchtet, freuen wir uns über Finanzspritzen für unsere Hochzeitsreise",
+      "info": "Spare Dir / spart euch den Gang zur Bank (oder: verzichtet auf Papier): es werden QR-Codes bereitstehen, mit welchen ihr das Geschenk ganz bequem und einfach überweisen könnt."
+    }
+  },
+  "hotel": {
+    "linkText": "Informationen zu Hotels",
+    "intro": "Für alle, die von weiter her anreisen, haben wir ein Zimmerkontingent im B&B Hotel in Stuttgart Bad Cannstatt (direkt gegenüber der Hochzeitslocation) reserviert.",
+    "intro2": "Die Hotelzimmer können unter folgender E-Mail angefragt werden:",
+    "email": "stuttgart-bad-cannstatt@hotelbb.com",
+    "intro3": "Mit dem Stichwort <strong>„Vintage Locations“</strong> erhaltet/erhälts Du/ ihr <strong>10 % Rabatt</strong> auf den Zimmer-Tagespreis."
+  },
+  "kinder": {
+    "linkText": "Was ist mit Kindern?",
+    "title": "Informationen zu Kindern",
+    "text": "Leider ist unsere Location aufgrund ihrer Größe und der Gefahrenquellen (vielbefahrene Straße, steile Treppen etc.) nicht kindergerecht. Wir würden uns daher auf eine Party „unter uns Erwachsenen“ und ausnahmsweise ohne Kinder freuen. Sollte das aufgrund fehlender Betreuungsmöglichkeit nicht gehen, gebt uns bitte kurz Bescheid. Vielen Dank für euer Verständnis"
+  },
+  "trauzeugen": {
+    "linkText": "Wer sind die Trauzeug:Innen",
+    "title": "Trauzeug:Innen",
+    "kalina": {
+      "name": "Kalina Haack",
+      "kontakt": {
+        "phone": "0176 12345678",
+        "email": "kalinas@mail.hier"
+      },
+      "text": "Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo."
+    },
+    "andi": {
+      "name": "Andras Menge",
+      "kontakt": {
+        "phone": "01762222222 12345678",
+        "email": "andi@mail.hier"
+      },
+      "text": "Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo."
+    }
+  }
 }

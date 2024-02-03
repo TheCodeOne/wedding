@@ -2,8 +2,8 @@
 	<nx-natural-language-form [formGroup]="naturalForm" style="padding: 0">
 		<div>
 			{{ isSingle() ? 'Ich' : 'Wir' }} werden zur Feier
-			<nx-word size="regular" label="attend" style="width: 375px">
-				<nx-dropdown formControlName="attend" style="width: 375px">
+			<nx-word size="regular" label="attend" style="width: 300px">
+				<nx-dropdown formControlName="attend" style="width: 300px">
 					<nx-dropdown-item value="{{ true }}">kommen</nx-dropdown-item>
 					<nx-dropdown-item value="{{ false }}">leider nicht kommen koennen</nx-dropdown-item>
 				</nx-dropdown>

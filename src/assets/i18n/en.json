@@ -1,0 +1,54 @@
+{
+  "love": "Love",
+  "dear": "Dear",
+  "you": "You",
+  "you_singular": "You",
+  "title": {
+    "sofiaAndDimi": "Sofia & Dimi",
+    "date": "01.06.2024",
+    "text": "Invitation"
+  },
+  "greeting": {
+    "intro": "We warmly invite you to celebrate our wedding with us on 01.06.2024.",
+    "intro2": "The civil ceremony will take place at 3:30 PM in the Wedding Hall Stuttgart-Bad Cannstatt, Marktplatz 10,70372 Stuttgart. After a toast in front of the registry office, we will proceed together to Cantine Royale, Mercedesstraße 3, 70372 Stuttgart, where the celebration will continue until 03:00 AM.",
+    "intro3": "Please let us know by 30.03.2024 whether you are coming and if you have any allergies.",
+    "where": "Mercedesstraße 3, 70372 Stuttgart",
+    "when": "01.06.2024, 5:00 PM",
+    "gifts": {
+      "text": "Gifts? If you wish to give us something, we would appreciate contributions for our honeymoon.",
+      "info": "Save yourself the trip to the bank (or: skip the paper): QR codes will be available for you to conveniently and easily transfer the gift."
+    }
+  },
+  "hotel": {
+    "linkText": "Hotel Information",
+    "intro": "For those coming from afar, we have reserved a room contingent at B&B Hotel in Stuttgart Bad Cannstatt (directly across from the wedding venue).",
+    "intro2": "Hotel rooms can be requested via the following email:",
+    "email": "stuttgart-bad-cannstatt@hotelbb.com",
+    "intro3": "With the keyword <strong>“Vintage Locations”</strong>, you will receive <strong>10% discount</strong> on the room daily rate."
+  },
+  "children": {
+    "linkText": "What about Children?",
+    "title": "Information about Children",
+    "text": "Unfortunately, due to its size and potential hazards (busy street, steep stairs, etc.), our venue is not child-friendly. We would appreciate a party for us adults only and, exceptionally, without children. If this is not possible due to a lack of childcare, please let us know. Thank you for your understanding."
+  },
+  "witnesses": {
+    "linkText": "Who are the Witnesses",
+    "title": "Witnesses",
+    "kalina": {
+      "name": "Kalina Haack",
+      "contact": {
+        "phone": "0176 12345678",
+        "email": "kalinas@mail.here"
+      },
+      "text": "Some copy text that describes what this overlay is all about. Lorem ipsum dolor sit amet, consetetur sadipscing et justo."
+    },
+    "andi": {
+      "name": "Andras Menge",
+      "contact": {
+        "phone": "01762222222 12345678",
+        "email": "andi@mail.here"
+      },
+      "text": "Some copy text that describes what this overlay is all about. Lorem ipsum dolor sit amet, consetetur sadipscing et justo."
+    }
+  }
+}

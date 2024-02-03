@@ -1,16 +1,89 @@
+<div *ngIf="isStartingAnimation">
+	<div class="bubbles">
+		<div (click)="toggleAudio()" style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'clicker', Arial, Helvetica, Sans-serif; font-size: 40px">
+			<!-- nx grid-->
+			<div nxLayout="grid">
+				<div nxRow>
+					<div nxCol="12">
+						<div style="text-align: center">
+							<div style="font-size: 40px">Sofia & Dimitrios</div>
+							<div style="font-family: Arial, Helvetica, Sans-serif; font-size: 10px">{{ isAudioPlaying ? '🔇' : '🔊' }} {{ isAudioLoaded ? '' : '(20MB)' }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+		<div class="bubble"></div>
+	</div>
+</div>
+<div>
+	<div class="wave"></div>
+	<div class="wave"></div>
+	<div class="wave"></div>
+</div>
 <div *ngIf="showContent && !isLoading" [@fadeIn]="false">
 	<div nxLayout="grid">
 		<div nxRow>
 			<div nxCol="6" colOffset="0" style="cursor: pointer" (click)="toggleLoadingAnimation()">{{ loadingAnimationText }}</div>
-			<div nxCol="2" colOffset="4">
+			<div nxCol="3" colOffset="0" style="cursor: pointer" (click)="toggleAudio()">{{ isAudioPlaying ? '🔇' : '🔊' }} {{ isAudioLoaded ? '' : '(20MB)' }}</div>
+			<div nxCol="2" colOffset="1">
 				<app-language-switcher></app-language-switcher>
 			</div>
 		</div>
 	</div>
 	<nx-small-stage class="stage">
-		<h1 nxHeadline="section">
-			{{ 'hochzeit' | translate }}
-		</h1>
+		<h1 nxHeadline="section" style="font-family: 'clicker'">{{ 'title.sofiaAndDimi' | translate }}</h1>
+		<h1 nxHeadline="section" style="font-family: 'clicker'">{{ 'title.date' | translate }}</h1>
+		<h1 nxHeadline="section" style="font-family: 'clicker'">{{ 'title.text' | translate }}</h1>
 	</nx-small-stage>
 	<div nxLayout="grid">
 		<div nxRow>
@@ -25,19 +98,21 @@
 		</div>
 		<div nxRow>
 			<div nxCol="12">
-				<div><a nxPlainButton (click)="openModal(ModalType.HOTEL)">Infos zum Hotel</a></div>
-				<div><a nxPlainButton (click)="openModal(ModalType.BEST_MAN_MAID_OF_HONOR)">Infos zu den Trauzeug:Innen</a></div>
-				<div><a nxPlainButton (click)="openModal(ModalType.CHILDREN)">Was ist mit unseren Kindern?</a></div>
+				<div>
+					<a nxPlainButton (click)="openModal(ModalType.HOTEL)">{{ 'hotel.linkText' | translate }}</a>
+				</div>
+				<div>
+					<a nxPlainButton (click)="openModal(ModalType.BEST_MAN_MAID_OF_HONOR)">{{ 'trauzeugen.linkText' | translate }}</a>
+				</div>
+				<div>
+					<a nxPlainButton (click)="openModal(ModalType.CHILDREN)">{{ 'kinder.linkText' | translate }}</a>
+				</div>
 			</div>
 		</div>
 	</div>
-
-	<footer nx-footer>
-		<nx-footer-copyright> &copy; 😼 </nx-footer-copyright>
-	</footer>
 </div>
 
-<div *ngIf="!showContent && !isLoading" [@fadeIn]="true" class="container">
+<div *ngIf="!showContent && !isLoading" class="container">
 	<div style="width: 100%; height: 0; padding-bottom: 43%">
 		<h1 nxHeadline="section" style="text-align: center">404</h1>
 		<img class="media_gif__MBeQG" style="aspect-ratio: 480/206" src="https://i.giphy.com/3o84sF21zQYacFcl68.webp" alt="" width="100%" />
@@ -50,39 +125,63 @@
 
 <ng-template #CHILDREN>
 	<div nxModalContent>
-		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">Wieso keine Kinder?</h3>
-
-		<p nxCopytext class="nx-margin-bottom-s nx-font-weight-bold">Weil ding</p>
-		<p nxCopytext class="nx-margin-bottom-m">
-			Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo
-			duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-			dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo duo dolores et ea rebum.
-		</p>
+		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">{{ 'kinder.title' | translate }}</h3>
+		<p nxCopytext class="nx-margin-bottom-m">{{ 'kinder.text' | translate }}</p>
 	</div>
 </ng-template>
 
 <ng-template #HOTEL>
 	<div nxModalContent>
-		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">Hier Hotelinfos?</h3>
+		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">{{ 'hotel.linkText' | translate }}</h3>
 
-		<p nxCopytext class="nx-margin-bottom-s nx-font-weight-bold">BNB in Cannstatt gegenueber</p>
+		<p nxCopytext class="nx-margin-bottom-s nx-font-weight-bold">{{ 'hotel.intro' | translate }}</p>
 		<p nxCopytext class="nx-margin-bottom-m">
-			Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo
-			duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-			dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo duo dolores et ea rebum.
+			{{ 'hotel.intro2' | translate }}
+			<nx-link>
+				<a href="mailto:{{ 'hotel.email' | translate }}">{{ 'hotel.email' | translate }}</a>
+			</nx-link>
 		</p>
+		<p nxCopytext class="nx-margin-bottom-m" [innerHTML]="'hotel.intro3' | translate"></p>
 	</div>
 </ng-template>
 
 <ng-template #BEST_MAN_MAID_OF_HONOR>
 	<div nxModalContent>
-		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">Hier Trauzeugen ZEUGS?</h3>
+		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">{{ 'trauzeugen.title' | translate }}</h3>
 
-		<p nxCopytext class="nx-margin-bottom-s nx-font-weight-bold">BNB in Cannstatt gegenueber</p>
-		<p nxCopytext class="nx-margin-bottom-m">
-			Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo
-			duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing Some copy text that describes what this overlay is all about. Tdiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-			dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing et justo duo dolores et ea rebum.
-		</p>
+		<nx-card highlight style="min-width: 100%; text-align: center">
+			<nx-card-header>
+				<h3 nxHeadline="subsection-small" class="nx-margin-bottom-2m">{{ 'trauzeugen.kalina.name' | translate }}</h3>
+			</nx-card-header>
+			<p nxHeadline="subsection-xsmall" class="nx-margin-bottom-m">
+				<nx-link>
+					<a href="tel:{{ 'trauzeugen.kalina.kontakt.phone' | translate }}">{{ 'trauzeugen.kalina.kontakt.phone' | translate }}</a>
+				</nx-link>
+			</p>
+			<p nxHeadline="subsection-xsmall" class="nx-margin-bottom-m">
+				<nx-link>
+					<a href="mailto:{{ 'trauzeugen.kalina.kontakt.email' | translate }}">{{ 'trauzeugen.kalina.kontakt.email' | translate }}</a>
+				</nx-link>
+			</p>
+			<p nxCopytext="normal">{{ 'trauzeugen.kalina.text' | translate }}</p>
+		</nx-card>
+		<br />
+		<br />
+		<nx-card highlight style="min-width: 100%; text-align: center">
+			<nx-card-header>
+				<h3 nxHeadline="subsection-small" class="nx-margin-bottom-2m">{{ 'trauzeugen.andi.name' | translate }}</h3>
+			</nx-card-header>
+			<p nxHeadline="subsection-xsmall" class="nx-margin-bottom-m">
+				<nx-link>
+					<a href="tel:{{ 'trauzeugen.andi.kontakt.phone' | translate }}">{{ 'trauzeugen.andi.kontakt.phone' | translate }}</a>
+				</nx-link>
+			</p>
+			<p nxHeadline="subsection-xsmall" class="nx-margin-bottom-m">
+				<nx-link>
+					<a href="mailto:{{ 'trauzeugen.andi.kontakt.email' | translate }}">{{ 'trauzeugen.andi.kontakt.email' | translate }}</a>
+				</nx-link>
+			</p>
+			<p nxCopytext="normal">{{ 'trauzeugen.andi.text' | translate }}</p>
+		</nx-card>
 	</div>
 </ng-template>

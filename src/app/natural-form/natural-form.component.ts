@@ -31,12 +31,10 @@ export class NaturalFormComponent implements OnInit {
 
 			this.naturalForm.updateValueAndValidity()
 		})
-		setTimeout(() => {
-			if (!this.guests?.guests) return
-			console.log(this.guests?.guests[0].willAttend)
-			this.naturalForm?.get('attend')?.setValue(`${this.guests?.guests[0].willAttend}`)
-			this.naturalForm.updateValueAndValidity()
-		}, 200)
+
+		if (!this.guests?.guests) return
+		this.naturalForm?.get('attend')?.setValue(`${this.guests?.guests[0].willAttend}`)
+		this.naturalForm.updateValueAndValidity()
 	}
 
 	get willAttend() {

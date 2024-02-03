@@ -2,4 +2,9 @@
 	<span *ngIf="hasGender('FEMALE')">{{ 'liebe' | translate }} {{ getName('FEMALE') }},</span>
 	<span *ngIf="hasGender('MALE')"> {{ 'lieber' | translate }} {{ getName('MALE') }}, </span>
 </h2>
-<h3>Was geht wieso hier so, blablabla Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse repellat deleniti cumque eveniet inventore corrupti doloremque. Facilis tempora architecto ex at repellendus quasi sapiente officia illum dicta, delectus explicabo deserunt.</h3>
+<h3>{{ 'greeting.intro' | translate }}</h3>
+<p nxCopytext="normal">{{ 'greeting.intro2' | translate }}</p>
+<p nxCopytext="normal">{{ 'greeting.intro3' | translate }}</p>
+<p nxCopytext="normal">{{ 'greeting.wo' | translate }}</p>
+<p nxCopytext="normal">{{ 'greeting.wann' | translate }}</p>
+<p nxCopytext="normal">{{ 'greeting.geschenke.text' | translate }}</p>

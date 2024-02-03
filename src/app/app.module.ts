@@ -21,6 +21,7 @@ import { NxOverlayModule } from '@aposin/ng-aquila/overlay'
 import { NxPopoverModule } from '@aposin/ng-aquila/popover'
 import { NxSmallStageModule } from '@aposin/ng-aquila/small-stage'
 import { NxNaturalLanguageFormModule } from '@aposin/ng-aquila/natural-language-form'
+import { NxCardModule } from '@aposin/ng-aquila/card'
 
 import { AppComponent } from './app.component'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
@@ -60,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NxPopoverModule,
 		NxSmallStageModule,
 		NxNaturalLanguageFormModule,
+		NxCardModule,
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,
