@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { Injectable, isDevMode } from '@angular/core'
 import { BehaviorSubject, lastValueFrom } from 'rxjs'
 
 const FAKE_GUESTS = {
@@ -13,6 +13,8 @@ const FAKE_GUESTS = {
 	willAttend: true,
 	isPlusOneEligable: true,
 }
+
+const backendUrl = isDevMode() ? 'http://localhost:3000' : 'https://wedding-backend-kokkslat-4c9d2773f2dd.herokuapp.com'
 
 interface Guests {
 	uuid: string
@@ -42,8 +44,7 @@ export class ApiService {
 	constructor(private http: HttpClient) {}
 
 	async getGuests(uuid: string): Promise<Guests> {
-		const guests: Guests = (await lastValueFrom(this.http.get(`http://localhost:3000/guests/${uuid}`))) as Guests
-		// const guests = FAKE_GUESTS
+		const guests: Guests = (await lastValueFrom(this.http.get(`${backendUrl}/guests/${uuid}`))) as Guests
 		this.guests.next(guests)
 		return guests
 	}
@@ -51,7 +52,7 @@ export class ApiService {
 	async updateGuests(uuid: string, guests: UpdateGuests) {
 		const { plusOne, hasPlusOne, attend: willAttend } = guests
 		await lastValueFrom(
-			this.http.patch(`http://localhost:3000/guests/${uuid}`, {
+			this.http.patch(`${backendUrl}/guests/${uuid}`, {
 				willAttend: willAttend === 'true',
 				...(plusOne && { plusOne }),
 				...(hasPlusOne && { hasPlusOne: hasPlusOne === 'true' }),
