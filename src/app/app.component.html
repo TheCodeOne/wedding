@@ -1,4 +1,4 @@
-<div *ngIf="isStartingAnimation">
+<div [@fadeIn]="false" *ngIf="isStartingAnimation">
 	<div class="bubbles">
 		<div (click)="enterApp()" style="cursor: pointer; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'clicker', Arial, Helvetica, Sans-serif; font-size: 40px">
 			<!-- nx grid-->

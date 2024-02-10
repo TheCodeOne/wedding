@@ -67,4 +67,8 @@ export class ApiService {
 	getUuidByCode(code: string): any {
 		return this.http.get(`${backendUrl}/code/${code}`)
 	}
+
+	addSubscription(subscription: PushSubscription): any {
+		return this.http.post(`${backendUrl}/subscription/`, subscription)
+	}
 }

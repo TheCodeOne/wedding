@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
 	codeInputValue = ''
 	codeForm!: FormGroup
 	readonly ModalType = ModalType
-	readonly VAPID_PUBLIC_KEY = 'BKFExe9faH6xT-J0bCSmx3GFTaFfZovDAeF0Brk3uyvZdd_I2NkbhIEsx67MywmbSKR250N3mPAIBssgsNHZpQw'
+	readonly VAPID_PUBLIC_KEY = 'BHJEs-TX4la7r8zKkKye2viwnfBTdyisftbOlkMSFea5THRWKku720UpBDR2VpG1YDVCo9r7SQkpR37SfbNZa4s'
 	private _guests: any = {}
 	private myCustomOptions: NxMessageToastConfig = {
 		duration: 5000,
@@ -66,16 +66,18 @@ export class AppComponent implements OnInit {
 				updateOn: 'change',
 			}),
 		})
+		this.subscribeToNotifications()
 		const uuid = localStorage.getItem('uuid')
 		if (uuid) {
 			this.init({ value: uuid, isUuid: true })
+			this.codeSucessfullyEntered = true
+			return
 		}
 
 		this.finalQueryParams$.subscribe(params => {
 			const code = params['code']
 			if (code) {
 				this.init({ value: code, isUuid: false })
-				this.subscribeToNotifications()
 			} else {
 				this.isLoading = false
 				this.showContent = false
@@ -113,7 +115,8 @@ export class AppComponent implements OnInit {
 			.requestSubscription({
 				serverPublicKey: this.VAPID_PUBLIC_KEY,
 			})
-			.then(sub => {
+			.then(async sub => {
+				await this.api.addSubscription(sub)
 				console.log(sub)
 			})
 			.catch(err => console.error('Could not subscribe to notifications', err))
