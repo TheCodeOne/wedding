@@ -1,10 +1,10 @@
 {
-  "liebe": "Liebe",
-  "lieber": "Lieber",
+  "liebe": "Liebe sich zum letzten Zeitpunkt unserer Kommunikation als weiblich identifizierende Person",
+  "lieber": "Lieber sich zum letzten Zeitpunkt unserer Kommunikation als männlich identifizierende Person",
   "euch": "Euch",
   "dich": "Dich",
   "title": {
-    "sofiaAndDimi": "Sofia & Dimi",
+    "sofiaAndDimi": "Sofia (she/her) & Dimi (he/him)",
     "date": "01.06.2024",
     "text": "Einladung"
   },
@@ -43,7 +43,7 @@
         "endText": " kommen."
       },
       "third": {
-        "text": " Meine Begleitung heißt",
+        "text": " Meine mich begleitend werdende Person:In identifiziert sich als",
         "errorMessage": "Bitte gib den Namen deiner Begleitung an."
       }
     }

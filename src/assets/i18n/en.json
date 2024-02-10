@@ -1,5 +1,5 @@
 {
-  "liebe": "Love",
+  "liebe": "Dear",
   "lieber": "Dear",
   "euch": "you all",
   "dich": "you",
@@ -9,9 +9,44 @@
     "text": "Invitation"
   },
   "greeting": {
+    "plusOneEligable": {
+      "intro": "We cordially invite you to celebrate our wedding with us on 01.06.2024.",
+      "intro2": "The celebration will take place starting at 5:00 PM at Cantine Royale, Mercedesstraße 3, 70372 Stuttgart.",
+      "intro3": "Please let us know by 30.03.2024 if you are coming."
+    },
     "intro": "We cordially invite you to celebrate our wedding with us on 01.06.2024.",
     "intro2": "The celebration will take place starting at 5:00 PM at Cantine Royale, Mercedesstraße 3, 70372 Stuttgart.",
-    "intro3": "Please let us know by 30.03.2024 if you are coming and if you have any allergies."
+    "intro3": "Please let us know by 30.03.2024 if you are coming."
+  },
+  "form": {
+    "first": {
+      "text": "We will",
+      "options": {
+        "yes": "attend",
+        "no": "unfortunately not be able to attend"
+      }
+    },
+    "plusOneEligable": {
+      "first": {
+        "text": "I will",
+        "options": {
+          "yes": "attend",
+          "no": "unfortunately not be able to attend"
+        }
+      },
+      "second": {
+        "text": " I will be coming",
+        "options": {
+          "alone": "alone",
+          "plusOne": "accompanied"
+        },
+        "endText": "."
+      },
+      "third": {
+        "text": " My plus one's name is",
+        "errorMessage": "Please provide the name of your plus one."
+      }
+    }
   },
   "hotel": {
     "linkText": "Hotel suggestion",
@@ -26,8 +61,8 @@
     "text": "Unfortunately, our venue is not child-friendly due to its size and hazards (busy street, steep stairs, etc.). Therefore, we would appreciate a party “among us adults” and exceptionally without children. If this is not possible due to a lack of childcare, please let us know briefly. <br /><br />Thank you very much for your understanding!"
   },
   "presents": {
-    "linkText": "Gifts",
-    "title": "If you would like to give us a gift, we would appreciate financial contributions for our honeymoon.",
+    "linkText": "Presents",
+    "title": "If you would like to give us a present, we would appreciate financial contributions for our honeymoon.",
     "text": "We would be even more delighted if the financial contributions reached us digitally rather than in cash.",
     "paypal": {
       "name": "Paypal",
@@ -35,8 +70,8 @@
     }
   },
   "trauzeugen": {
-    "linkText": "Witnesses",
-    "title": "Witnesses",
+    "linkText": "Maid of honor & Best man",
+    "title": "Maid of honor & Best man",
     "kalina": {
       "name": "Kalina Haack",
       "contact": {

@@ -158,14 +158,6 @@ export class AppComponent {
 
 	private setBackGroundImage() {
 		if (!this.isStartingAnimation) return
-		const imagePath = this.getImageByWidth()
-		document.body.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url(${imagePath})`
-	}
-
-	private getImageByWidth() {
-		if (this.innerWidth < 1180) {
-			return '/assets/images/a.jpg'
-		}
-		return '/assets/images/a.jpg'
+		document.body.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/assets/images/sofia_and_dimi.jpeg')`
 	}
 }

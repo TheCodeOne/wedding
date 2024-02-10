@@ -2,6 +2,14 @@
 	<span *ngIf="hasGender('FEMALE')">{{ 'liebe' | translate }} {{ getName('FEMALE') }},</span>
 	<span *ngIf="hasGender('MALE')"> {{ 'lieber' | translate }} {{ getName('MALE') }}, </span>
 </h2>
-<p>{{ 'greeting.intro' | translate }}</p>
-<p class="text" nxCopytext="normal">{{ 'greeting.intro2' | translate }}</p>
-<p class="text" nxCopytext="normal">{{ 'greeting.intro3' | translate }}</p>
+
+<ng-container *ngIf="isSingle()">
+	<p class="text" nxCopytext="normal">{{ 'greeting.plusOneEligable.intro' | translate }}</p>
+	<p class="text" nxCopytext="normal">{{ 'greeting.plusOneEligable.intro2' | translate }}</p>
+	<p class="text" nxCopytext="normal">{{ 'greeting.plusOneEligable.intro3' | translate }}</p>
+</ng-container>
+<ng-container *ngIf="!isSingle()">
+	<p>{{ 'greeting.intro' | translate }}</p>
+	<p class="text" nxCopytext="normal">{{ 'greeting.intro2' | translate }}</p>
+	<p class="text" nxCopytext="normal">{{ 'greeting.intro3' | translate }}</p>
+</ng-container>

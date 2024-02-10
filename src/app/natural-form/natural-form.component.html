@@ -1,31 +1,31 @@
 <form class="form-example">
 	<nx-natural-language-form [formGroup]="naturalForm" style="padding: 0">
 		<div>
-			<span class="text">{{ isSingle() ? 'Ich' : 'Wir' }} werde zur Feier</span>
+			<span class="text">{{ (isSingle() ? 'form.plusOneEligable.first.text' : 'form.first.text') | translate }}</span>
 			<nx-word class="text" size="short" label="attend" style="width: 150px">
 				<nx-dropdown formControlName="attend" style="width: 150px">
-					<nx-dropdown-item value="{{ true }}">kommen</nx-dropdown-item>
-					<nx-dropdown-item value="{{ false }}">leider nicht kommen können</nx-dropdown-item>
+					<nx-dropdown-item value="{{ true }}">{{ 'form.first.options.yes' | translate }}</nx-dropdown-item>
+					<nx-dropdown-item value="{{ false }}">{{ 'form.first.options.no' | translate }}</nx-dropdown-item>
 				</nx-dropdown>
 			</nx-word>
 			<span class="text">.</span>
 
 			<!-- SINGLE -->
 			<ng-container *ngIf="isSingle() && willAttend">
-				<span class="text"> Ich werde</span>
+				<span class="text"> {{ 'form.plusOneEligable.second.text' | translate }}</span>
 				<nx-word class="text" size="regular" label="plusOne">
 					<nx-dropdown formControlName="hasPlusOne">
-						<nx-dropdown-item value="false">alleine</nx-dropdown-item>
-						<nx-dropdown-item value="true">in Begleitung</nx-dropdown-item>
+						<nx-dropdown-item value="false">{{ 'form.plusOneEligable.second.options.alone' | translate }}</nx-dropdown-item>
+						<nx-dropdown-item value="true">{{ 'form.plusOneEligable.second.options.plusOne' | translate }}</nx-dropdown-item>
 					</nx-dropdown>
 				</nx-word>
-				<span class="text"> kommen.</span>
+				<span class="text">{{ 'form.plusOneEligable.second.endText' | translate }}</span>
 
 				<ng-container *ngIf="showPlusOnePhrase()">
-					<span class="text"> Meine Begleitung heißt</span>
+					<span class="text">{{ 'form.plusOneEligable.third.text' | translate }}</span>
 					<nx-word class="text" size="regular" label="plusOne">
 						<input class="text" nxInput formControlName="plusOne" />
-						<div nxError>This field is required.</div>
+						<div nxError>{{ 'form.plusOneEligable.third.errorMessage' | translate }}</div>
 					</nx-word>
 					<span class="text">.</span>
 				</ng-container>
