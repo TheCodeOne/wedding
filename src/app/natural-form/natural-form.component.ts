@@ -5,6 +5,8 @@ import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/m
 import { debounceTime } from 'rxjs/internal/operators/debounceTime'
 import { ApiService } from '../services/api.service'
 import { SIZES } from '@aposin/ng-aquila/natural-language-form'
+import { TranslateService } from '@ngx-translate/core'
+import { lastValueFrom } from 'rxjs'
 
 @Component({
 	selector: 'app-natural-form',
@@ -24,7 +26,7 @@ export class NaturalFormComponent implements OnInit {
 	plusOneEligable: boolean = true
 	hasPlusOne: boolean = true
 
-	constructor(private readonly fb: FormBuilder, private toastService: NxMessageToastService, private apiService: ApiService) {}
+	constructor(private readonly fb: FormBuilder, private toastService: NxMessageToastService, private apiService: ApiService, private translateService: TranslateService) {}
 
 	ngOnInit(): void {
 		this.naturalForm?.get('hasPlusOne')?.valueChanges.subscribe(() => {
@@ -67,9 +69,9 @@ export class NaturalFormComponent implements OnInit {
 				duration: 3000,
 				context: 'success',
 			}
-			console.log(this.naturalForm.value)
 			await this.apiService.updateGuests(this.guests.uuid, this.naturalForm.value)
-			this.toastService.open('Danke fuer deine Rueckmeldung 😊', myCustomOptions)
+			const thanksMessage = await lastValueFrom(this.translateService.get('successMessage'))
+			this.toastService.open(thanksMessage, myCustomOptions)
 		} catch (error) {
 			const myCustomOptions: NxMessageToastConfig = {
 				duration: 0,
