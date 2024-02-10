@@ -123,15 +123,29 @@
 	</div>
 </div>
 
-<div *ngIf="!showContent && !isLoading" class="container">
-	<div style="width: 100%; height: 0; padding-bottom: 43%">
-		<h1 nxHeadline="section" style="text-align: center">404</h1>
-		<img class="media_gif__MBeQG" style="aspect-ratio: 480/206" src="https://i.giphy.com/3o84sF21zQYacFcl68.webp" alt="" width="100%" />
-		<p>
-			via GIPHY <br />
-			(https://giphy.com/gifs/starwars-movie-star-wars-3o84sF21zQYacFcl68)
-		</p>
-		<p>uuid: {{ getUuid() }}</p>
+<div *ngIf="!showContent && !isLoading && !codeSucessfullyEntered" class="container">
+	<div nxLayout="grid">
+		<div nxRow>
+			<div nxCol="12">
+				<div style="text-align: center">
+					<div><p nxCopytext>Code?</p></div>
+				</div>
+			</div>
+		</div>
+		<div nxRow>
+			<div nxCol="12">
+				<div style="text-align: center">
+					<form #form="ngForm" [formGroup]="codeForm">
+						<nx-code-input #codeInput formControlName="keyCode"></nx-code-input>
+
+						<div *ngIf="codeInput.errorState">
+							<nx-error *ngIf="keyCode?.hasError('required')" class="nx-margin-y-xs"> Entry is required. </nx-error>
+							<nx-error *ngIf="keyCode?.hasError('minlength')" class="nx-margin-y-xs"> Entry is too short. </nx-error>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 

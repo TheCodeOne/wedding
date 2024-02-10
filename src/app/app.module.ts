@@ -22,13 +22,14 @@ import { NxPopoverModule } from '@aposin/ng-aquila/popover'
 import { NxSmallStageModule } from '@aposin/ng-aquila/small-stage'
 import { NxNaturalLanguageFormModule } from '@aposin/ng-aquila/natural-language-form'
 import { NxCardModule } from '@aposin/ng-aquila/card'
+import { NxCodeInputModule } from '@aposin/ng-aquila/code-input'
 
 import { AppComponent } from './app.component'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component'
 import { NaturalFormComponent } from './natural-form/natural-form.component'
-import { GreetingComponent } from './greeting/greeting.component';
+import { GreetingComponent } from './greeting/greeting.component'
 import { ServiceWorkerModule } from '@angular/service-worker'
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -63,6 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NxSmallStageModule,
 		NxNaturalLanguageFormModule,
 		NxCardModule,
+		NxCodeInputModule,
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,
@@ -71,12 +73,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 			},
 			defaultLanguage: 'de',
 		}),
-  ServiceWorkerModule.register('ngsw-worker.js', {
-    enabled: !isDevMode(),
-    // Register the ServiceWorker as soon as the application is stable
-    // or after 30 seconds (whichever comes first).
-    registrationStrategy: 'registerWhenStable:30000'
-  }),
+		ServiceWorkerModule.register('ngsw-worker.js', {
+			enabled: !isDevMode(),
+			// Register the ServiceWorker as soon as the application is stable
+			// or after 30 seconds (whichever comes first).
+			registrationStrategy: 'registerWhenStable:30000',
+		}),
 	],
 	bootstrap: [AppComponent],
 })

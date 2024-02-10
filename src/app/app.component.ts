@@ -1,11 +1,13 @@
 import { AnimationTriggerMetadata, animate, style, transition, trigger } from '@angular/animations'
-import { Component, HostListener, TemplateRef, ViewChild } from '@angular/core'
+import { Component, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/message'
 import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
-import { Observable, filter, map, merge } from 'rxjs'
+import { Observable, filter, lastValueFrom, map, merge } from 'rxjs'
 import { ApiService, PrivateData } from './services/api.service'
 import { SwPush } from '@angular/service-worker'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 
 enum ModalType {
 	CHILDREN = 'CHILDREN',
@@ -24,7 +26,7 @@ function FadeIn(timingIn: number, height: boolean = false): AnimationTriggerMeta
 	styleUrls: ['./app.component.scss'],
 	animations: [FadeIn(1000, true)],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 	@ViewChild(`${ModalType.CHILDREN}`) childrenAlternativeTemplateRef!: TemplateRef<any>
 	@ViewChild(`${ModalType.HOTEL}`) hotelTemplateRef!: TemplateRef<any>
 	@ViewChild(`${ModalType.BEST_MAN_MAID_OF_HONOR}`) bestManAndMaidOfHonorTemplateRef!: TemplateRef<any>
@@ -43,22 +45,59 @@ export class AppComponent {
 	isAudioPlaying = false
 	isAudioLoaded = false
 	showClickIcon = false
+	codeSucessfullyEntered = false
 	privateData: PrivateData = {} as PrivateData
+	codeInputValue = ''
+	codeForm!: FormGroup
 	readonly ModalType = ModalType
 	readonly VAPID_PUBLIC_KEY = 'BKFExe9faH6xT-J0bCSmx3GFTaFfZovDAeF0Brk3uyvZdd_I2NkbhIEsx67MywmbSKR250N3mPAIBssgsNHZpQw'
 	private _guests: any = {}
+	private myCustomOptions: NxMessageToastConfig = {
+		duration: 5000,
+		context: 'info',
+	}
 
-	constructor(readonly dialogService: NxDialogService, private api: ApiService, private activatedRoute: ActivatedRoute, private messageToastService: NxMessageToastService, private swPush: SwPush) {
+	constructor(readonly dialogService: NxDialogService, private api: ApiService, private activatedRoute: ActivatedRoute, private messageToastService: NxMessageToastService, private swPush: SwPush, private router: Router) {}
+
+	ngOnInit(): void {
+		this.codeForm = new FormGroup({
+			keyCode: new FormControl(this.codeInputValue, {
+				validators: [Validators.required, Validators.minLength(6)],
+				updateOn: 'change',
+			}),
+		})
+		const uuid = localStorage.getItem('uuid')
+		if (uuid) {
+			this.init({ value: uuid, isUuid: true })
+		}
+
 		this.finalQueryParams$.subscribe(params => {
-			const uuid = params['uuid']
-			if (uuid) {
-				this.init(uuid)
+			const code = params['code']
+			if (code) {
+				this.init({ value: code, isUuid: false })
 				this.subscribeToNotifications()
 			} else {
 				this.isLoading = false
 				this.showContent = false
 			}
 		})
+
+		this.codeForm.valueChanges.subscribe(async value => {
+			if (value.keyCode.length === 6) {
+				try {
+					const { uuid } = await this.api.getUuidByCode(value.keyCode).toPromise()
+					this.init({ value: uuid, isUuid: true })
+					this.codeSucessfullyEntered = true
+				} catch (error: any) {
+					this.messageToastService.open(error.error.message, this.myCustomOptions)
+					this.codeSucessfullyEntered = false
+				}
+			}
+		})
+	}
+
+	get keyCode() {
+		return this.codeForm.get('keyCode')
 	}
 
 	get loadingAnimationText() {
@@ -80,26 +119,33 @@ export class AppComponent {
 			.catch(err => console.error('Could not subscribe to notifications', err))
 	}
 
-	async init(uuid: string) {
-		// alone: 5b975dc4-d606-4331-bd44-eeb37b8ed247
-		// zwei : 5b975dc4-d606-4331-bd44-eeb37b8ed248
+	async init({ value, isUuid }: { value: string; isUuid: boolean }) {
 		try {
+			let uuid
 			this.startClickIconTimer()
+			if (!isUuid) {
+				const response = (await lastValueFrom(this.api.getUuidByCode(value))) as { uuid: string }
+				uuid = response.uuid
+			} else {
+				uuid = value
+			}
+			localStorage.setItem('uuid', uuid)
 			this._guests = await this.api.getGuests(uuid)
 			this.privateData = await this.api.getPrivateData(uuid)
-			localStorage.setItem('uuid', uuid)
 			if (localStorage.getItem('disableLoadingAnimation') !== 'true') {
 				this.isStartingAnimation = true
 				this.setBackGroundImage()
 			} else {
 				this.enterApp()
 			}
+			this.router.navigate([], {
+				queryParams: {
+					code: null,
+				},
+				queryParamsHandling: 'merge',
+			})
 		} catch (error) {
-			const myCustomOptions: NxMessageToastConfig = {
-				duration: 0,
-				context: 'info',
-			}
-			this.messageToastService.open('Invitation link seems to be unknown. Contact Sofia or Dimi 🤷‍♀️', myCustomOptions)
+			this.messageToastService.open('Invitation link seems to be unknown. Contact Sofia or Dimi 🤷‍♀️', this.myCustomOptions)
 			console.log(error)
 		}
 	}

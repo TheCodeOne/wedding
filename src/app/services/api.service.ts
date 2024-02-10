@@ -63,4 +63,8 @@ export class ApiService {
 		const privateData: PrivateData = (await lastValueFrom(this.http.get(`${backendUrl}/private-data/${uuid}`))) as PrivateData
 		return privateData
 	}
+
+	getUuidByCode(code: string): any {
+		return this.http.get(`${backendUrl}/code/${code}`)
+	}
 }
