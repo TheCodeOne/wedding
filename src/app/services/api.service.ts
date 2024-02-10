@@ -2,19 +2,18 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable, isDevMode } from '@angular/core'
 import { BehaviorSubject, lastValueFrom } from 'rxjs'
 
-const FAKE_GUESTS = {
-	uuid: '5b975dc4-d606-4331-bd44-eeb37b8ed247',
-	guests: [
-		{
-			name: 'Dimitrios Singlekonias',
-			gender: 'MALE',
-		},
-	],
-	willAttend: true,
-	isPlusOneEligable: true,
+const backendUrl = isDevMode() ? 'http://localhost:3000' : 'https://wedding-backend-kokkslat-4c9d2773f2dd.herokuapp.com'
+
+export interface PrivateData {
+	maidOfHonor: Data
+	bestMan: Data
 }
 
-const backendUrl = isDevMode() ? 'http://localhost:3000' : 'https://wedding-backend-kokkslat-4c9d2773f2dd.herokuapp.com'
+interface Data {
+	name: string
+	phone: string
+	email: string
+}
 
 interface Guests {
 	uuid: string
@@ -58,5 +57,10 @@ export class ApiService {
 				...(hasPlusOne && { hasPlusOne: hasPlusOne === 'true' }),
 			})
 		)
+	}
+
+	async getPrivateData(uuid: string): Promise<PrivateData> {
+		const privateData: PrivateData = (await lastValueFrom(this.http.get(`${backendUrl}/private-data/${uuid}`))) as PrivateData
+		return privateData
 	}
 }

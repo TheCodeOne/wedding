@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router'
 import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/message'
 import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
 import { Observable, filter, map, merge } from 'rxjs'
-import { ApiService } from './services/api.service'
+import { ApiService, PrivateData } from './services/api.service'
 
 enum ModalType {
 	CHILDREN = 'CHILDREN',
@@ -42,6 +42,7 @@ export class AppComponent {
 	isAudioPlaying = false
 	isAudioLoaded = false
 	showClickIcon = false
+	privateData: PrivateData = {} as PrivateData
 	readonly ModalType = ModalType
 	private _guests: any = {}
 
@@ -72,6 +73,7 @@ export class AppComponent {
 		try {
 			this.startClickIconTimer()
 			this._guests = await this.api.getGuests(uuid)
+			this.privateData = await this.api.getPrivateData(uuid)
 			if (localStorage.getItem('disableLoadingAnimation') !== 'true') {
 				this.isStartingAnimation = true
 				this.setBackGroundImage()
