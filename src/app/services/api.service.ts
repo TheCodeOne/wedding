@@ -68,7 +68,7 @@ export class ApiService {
 		return this.http.get(`${backendUrl}/code/${code}`)
 	}
 
-	addSubscription(subscription: PushSubscription): any {
-		return this.http.post(`${backendUrl}/subscription/`, subscription)
+	async addSubscription(subscription: PushSubscription): Promise<void> {
+		await lastValueFrom(this.http.post(`${backendUrl}/subscription/`, subscription))
 	}
 }

@@ -14,7 +14,17 @@ export class LanguageSwitcherComponent {
 		translate.setDefaultLang('de')
 		translate.use(userLang)
 	}
+
 	changeLanguage(key: string): void {
 		this.translate.use(key)
+	}
+
+	getCurrentLanguage(): string {
+		const languageToFlagMappping: Record<string, string> = {
+			de: '🇩🇪',
+			en: '🇺🇸',
+			gr: '🇬🇷',
+		}
+		return languageToFlagMappping[this.translate.currentLang] || '🤷‍♀️'
 	}
 }

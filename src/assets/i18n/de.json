@@ -87,5 +87,6 @@
       }
     }
   },
-  "successMessage": "Danke für die Rückmeldung 😊"
+  "successMessage": "Danke für die Rückmeldung 😊",
+  "subscribe": "Aktivire Benachritigungen (kein Spam)"
 }

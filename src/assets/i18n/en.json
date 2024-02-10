@@ -87,5 +87,6 @@
       }
     }
   },
-  "successMessage": "Thanks for your response 😊"
+  "successMessage": "Thanks for your response 😊",
+  "subscribe": "Activate Notifications (no Spam)"
 }

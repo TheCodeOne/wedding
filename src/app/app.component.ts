@@ -110,6 +110,7 @@ export class AppComponent implements OnInit {
 		const currentState = localStorage.getItem('disableLoadingAnimation')
 		localStorage.setItem('disableLoadingAnimation', currentState === 'true' ? 'false' : 'true')
 	}
+
 	subscribeToNotifications() {
 		this.swPush
 			.requestSubscription({
