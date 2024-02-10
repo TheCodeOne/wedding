@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http'
-import { NgModule } from '@angular/core'
+import { NgModule, isDevMode } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -28,7 +28,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component'
 import { NaturalFormComponent } from './natural-form/natural-form.component'
-import { GreetingComponent } from './greeting/greeting.component'
+import { GreetingComponent } from './greeting/greeting.component';
+import { ServiceWorkerModule } from '@angular/service-worker'
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http)
@@ -70,6 +71,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 			},
 			defaultLanguage: 'de',
 		}),
+  ServiceWorkerModule.register('ngsw-worker.js', {
+    enabled: !isDevMode(),
+    // Register the ServiceWorker as soon as the application is stable
+    // or after 30 seconds (whichever comes first).
+    registrationStrategy: 'registerWhenStable:30000'
+  }),
 	],
 	bootstrap: [AppComponent],
 })
