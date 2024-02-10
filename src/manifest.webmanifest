@@ -1,8 +1,8 @@
 {
-  "name": "wedding",
-  "short_name": "wedding",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "KokkSlat Hochzeit",
+  "short_name": "Hochzeit",
+  "theme_color": "#5a1966",
+  "background_color": "#8e678c",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

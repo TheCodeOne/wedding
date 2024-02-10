@@ -5,6 +5,7 @@ import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/m
 import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
 import { Observable, filter, map, merge } from 'rxjs'
 import { ApiService, PrivateData } from './services/api.service'
+import { SwPush } from '@angular/service-worker'
 
 enum ModalType {
 	CHILDREN = 'CHILDREN',
@@ -44,13 +45,15 @@ export class AppComponent {
 	showClickIcon = false
 	privateData: PrivateData = {} as PrivateData
 	readonly ModalType = ModalType
+	readonly VAPID_PUBLIC_KEY = 'BKFExe9faH6xT-J0bCSmx3GFTaFfZovDAeF0Brk3uyvZdd_I2NkbhIEsx67MywmbSKR250N3mPAIBssgsNHZpQw'
 	private _guests: any = {}
 
-	constructor(readonly dialogService: NxDialogService, private api: ApiService, private activatedRoute: ActivatedRoute, private messageToastService: NxMessageToastService) {
+	constructor(readonly dialogService: NxDialogService, private api: ApiService, private activatedRoute: ActivatedRoute, private messageToastService: NxMessageToastService, private swPush: SwPush) {
 		this.finalQueryParams$.subscribe(params => {
 			const uuid = params['uuid']
 			if (uuid) {
 				this.init(uuid)
+				this.subscribeToNotifications()
 			} else {
 				this.isLoading = false
 				this.showContent = false
@@ -66,6 +69,16 @@ export class AppComponent {
 		const currentState = localStorage.getItem('disableLoadingAnimation')
 		localStorage.setItem('disableLoadingAnimation', currentState === 'true' ? 'false' : 'true')
 	}
+	subscribeToNotifications() {
+		this.swPush
+			.requestSubscription({
+				serverPublicKey: this.VAPID_PUBLIC_KEY,
+			})
+			.then(sub => {
+				console.log(sub)
+			})
+			.catch(err => console.error('Could not subscribe to notifications', err))
+	}
 
 	async init(uuid: string) {
 		// alone: 5b975dc4-d606-4331-bd44-eeb37b8ed247
@@ -74,6 +87,7 @@ export class AppComponent {
 			this.startClickIconTimer()
 			this._guests = await this.api.getGuests(uuid)
 			this.privateData = await this.api.getPrivateData(uuid)
+			localStorage.setItem('uuid', uuid)
 			if (localStorage.getItem('disableLoadingAnimation') !== 'true') {
 				this.isStartingAnimation = true
 				this.setBackGroundImage()
@@ -85,9 +99,13 @@ export class AppComponent {
 				duration: 0,
 				context: 'info',
 			}
-			this.messageToastService.open('Invitation link seems to be unknow. Contact Sofia or Dimi 🤷‍♀️', myCustomOptions)
+			this.messageToastService.open('Invitation link seems to be unknown. Contact Sofia or Dimi 🤷‍♀️', myCustomOptions)
 			console.log(error)
 		}
+	}
+
+	getUuid() {
+		return localStorage.getItem('uuid')
 	}
 
 	enterApp() {
@@ -141,9 +159,7 @@ export class AppComponent {
 
 	private get finalQueryParams$(): Observable<Params> {
 		return merge(
-			// get urls with query params like /test?project=test
 			this.activatedRoute.queryParams.pipe(filter(params => Object.keys(params).length > 0)),
-			// get urls without query params like /test
 			this.activatedRoute.queryParams.pipe(
 				filter(() => !(window.location.href || '').includes('?')),
 				map(() => ({}))
@@ -152,7 +168,6 @@ export class AppComponent {
 	}
 
 	private resetScene() {
-		// remove background image from body
 		document.body.style.backgroundImage = 'none'
 		document.body.style.opacity = '1'
 		document.body.style.backgroundColor = '#3e213a94'
