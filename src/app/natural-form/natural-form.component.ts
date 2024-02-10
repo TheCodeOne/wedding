@@ -4,6 +4,7 @@ import { getGuestName } from '../utils'
 import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/message'
 import { debounceTime } from 'rxjs/internal/operators/debounceTime'
 import { ApiService } from '../services/api.service'
+import { SIZES } from '@aposin/ng-aquila/natural-language-form'
 
 @Component({
 	selector: 'app-natural-form',
@@ -81,6 +82,11 @@ export class NaturalFormComponent implements OnInit {
 
 	getName(gender: string) {
 		return getGuestName(this.guests, gender)
+	}
+
+	getAttendSize(): SIZES {
+		console.log(this.naturalForm.get('attend')?.value)
+		return this.naturalForm.get('attend')?.value === 'true' ? ('regular' as SIZES) : ('long' as SIZES)
 	}
 
 	private isValid(): boolean {

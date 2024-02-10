@@ -103,18 +103,21 @@
 				<app-natural-form [guests]="getGuests()"></app-natural-form>
 			</div>
 		</div>
+
+		<br />
+
 		<div nxRow>
 			<div nxCol="12">
-				<nx-icon name="info-circle"></nx-icon>&nbsp;<a nxPlainButton (click)="openModal(ModalType.BEST_MAN_MAID_OF_HONOR)">{{ 'trauzeugen.linkText' | translate }}</a>
+				<nx-icon class="color-primary" name="info-circle"></nx-icon>&nbsp;<a class="color-primary" nxPlainButton (click)="openModal(ModalType.BEST_MAN_MAID_OF_HONOR)">{{ 'trauzeugen.linkText' | translate }}</a>
 			</div>
 			<div nxCol="12">
-				<nx-icon name="info-circle"></nx-icon>&nbsp;<a nxPlainButton (click)="openModal(ModalType.HOTEL)">{{ 'hotel.linkText' | translate }}</a>
+				<nx-icon class="color-primary" name="info-circle"></nx-icon>&nbsp;<a class="color-primary" nxPlainButton (click)="openModal(ModalType.HOTEL)">{{ 'hotel.linkText' | translate }}</a>
 			</div>
 			<div nxCol="12">
-				<nx-icon name="info-circle"></nx-icon>&nbsp;<a nxPlainButton (click)="openModal(ModalType.CHILDREN)">{{ 'kinder.linkText' | translate }}</a>
+				<nx-icon class="color-primary" name="info-circle"></nx-icon>&nbsp;<a class="color-primary" nxPlainButton (click)="openModal(ModalType.CHILDREN)">{{ 'kinder.linkText' | translate }}</a>
 			</div>
 			<div nxCol="12">
-				<nx-icon name="info-circle"></nx-icon>&nbsp;<a nxPlainButton (click)="openModal(ModalType.PRESENTS)">{{ 'presents.linkText' | translate }}</a>
+				<nx-icon class="color-primary" name="info-circle"></nx-icon>&nbsp;<a class="color-primary" nxPlainButton (click)="openModal(ModalType.PRESENTS)">{{ 'presents.linkText' | translate }}</a>
 			</div>
 		</div>
 	</div>

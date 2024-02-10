@@ -1,0 +1,39 @@
+@media (max-width: 768px) {
+	.text {
+		font-size: 12px !important;
+		line-height: 20px !important;
+		font-weight: normal !important;
+	}
+}
+
+@media (min-width: 769px) and (max-width: 1800px) {
+	.text {
+		font-size: 12px !important;
+		line-height: 20px !important;
+		font-weight: normal !important;
+	}
+}
+
+@media (min-width: 1801px) {
+	.text {
+		font-size: 12px !important;
+		line-height: 20px !important;
+		font-weight: normal !important;
+	}
+}
+
+nx-dropdown.is-filled,
+nx-dropdown.has-focus {
+	color: #813d7e !important;
+	border-color: #b7b7b7 !important;
+}
+
+.nx-dropdown-results__option {
+	background-color: #8e678c !important;
+}
+
+::ng-deep {
+	.nx-dropdown__container {
+		font-size: 12px !important;
+	}
+}

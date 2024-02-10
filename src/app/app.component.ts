@@ -153,6 +153,7 @@ export class AppComponent {
 		// remove background image from body
 		document.body.style.backgroundImage = 'none'
 		document.body.style.opacity = '1'
+		document.body.style.backgroundColor = '#3e213a94'
 	}
 
 	private setBackGroundImage() {
@@ -163,8 +164,8 @@ export class AppComponent {
 
 	private getImageByWidth() {
 		if (this.innerWidth < 1180) {
-			return '/assets/images/sofia_and_dimi_2.jpg'
+			return '/assets/images/a.jpg'
 		}
-		return '/assets/images/landscape.jpg'
+		return '/assets/images/a.jpg'
 	}
 }

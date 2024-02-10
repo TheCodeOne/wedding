@@ -1,54 +1,55 @@
 {
-  "love": "Love",
-  "dear": "Dear",
-  "you": "You",
-  "you_singular": "You",
+  "liebe": "Love",
+  "lieber": "Dear",
+  "euch": "you all",
+  "dich": "you",
   "title": {
     "sofiaAndDimi": "Sofia & Dimi",
     "date": "01.06.2024",
     "text": "Invitation"
   },
   "greeting": {
-    "intro": "We warmly invite you to celebrate our wedding with us on 01.06.2024.",
-    "intro2": "The civil ceremony will take place at 3:30 PM in the Wedding Hall Stuttgart-Bad Cannstatt, Marktplatz 10,70372 Stuttgart. After a toast in front of the registry office, we will proceed together to Cantine Royale, Mercedesstraße 3, 70372 Stuttgart, where the celebration will continue until 03:00 AM.",
-    "intro3": "Please let us know by 30.03.2024 whether you are coming and if you have any allergies.",
-    "where": "Mercedesstraße 3, 70372 Stuttgart",
-    "when": "01.06.2024, 5:00 PM",
-    "gifts": {
-      "text": "Gifts? If you wish to give us something, we would appreciate contributions for our honeymoon.",
-      "info": "Save yourself the trip to the bank (or: skip the paper): QR codes will be available for you to conveniently and easily transfer the gift."
-    }
+    "intro": "We cordially invite you to celebrate our wedding with us on 01.06.2024.",
+    "intro2": "The celebration will take place starting at 5:00 PM at Cantine Royale, Mercedesstraße 3, 70372 Stuttgart.",
+    "intro3": "Please let us know by 30.03.2024 if you are coming and if you have any allergies."
   },
   "hotel": {
-    "linkText": "Hotel Information",
-    "intro": "For those coming from afar, we have reserved a room contingent at B&B Hotel in Stuttgart Bad Cannstatt (directly across from the wedding venue).",
-    "intro2": "Hotel rooms can be requested via the following email:",
+    "linkText": "Hotel suggestion",
+    "intro": "B&B Hotel in Stuttgart Bad Cannstatt (directly opposite the wedding venue)",
+    "intro2": "The hotel rooms can be requested via the following email:",
     "email": "stuttgart-bad-cannstatt@hotelbb.com",
-    "intro3": "With the keyword <strong>“Vintage Locations”</strong>, you will receive <strong>10% discount</strong> on the room daily rate."
+    "intro3": "With the keyword <strong>“Vintage Locations,”</strong> you will receive <strong>10% discount</strong> on the daily room rate."
   },
-  "children": {
-    "linkText": "What about Children?",
-    "title": "Information about Children",
-    "text": "Unfortunately, due to its size and potential hazards (busy street, steep stairs, etc.), our venue is not child-friendly. We would appreciate a party for us adults only and, exceptionally, without children. If this is not possible due to a lack of childcare, please let us know. Thank you for your understanding."
+  "kinder": {
+    "linkText": "Children",
+    "title": "Children",
+    "text": "Unfortunately, our venue is not child-friendly due to its size and hazards (busy street, steep stairs, etc.). Therefore, we would appreciate a party “among us adults” and exceptionally without children. If this is not possible due to a lack of childcare, please let us know briefly. <br /><br />Thank you very much for your understanding!"
   },
-  "witnesses": {
-    "linkText": "Who are the Witnesses",
+  "presents": {
+    "linkText": "Gifts",
+    "title": "If you would like to give us a gift, we would appreciate financial contributions for our honeymoon.",
+    "text": "We would be even more delighted if the financial contributions reached us digitally rather than in cash.",
+    "paypal": {
+      "name": "Paypal",
+      "link": "http://www.paypal.me/DimitriosKokkonias"
+    }
+  },
+  "trauzeugen": {
+    "linkText": "Witnesses",
     "title": "Witnesses",
     "kalina": {
       "name": "Kalina Haack",
       "contact": {
         "phone": "0176 12345678",
-        "email": "kalinas@mail.here"
-      },
-      "text": "Some copy text that describes what this overlay is all about. Lorem ipsum dolor sit amet, consetetur sadipscing et justo."
+        "email": "kalinas@mail.hier"
+      }
     },
     "andi": {
-      "name": "Andras Menge",
+      "name": "Andreas Menge",
       "contact": {
-        "phone": "01762222222 12345678",
-        "email": "andi@mail.here"
-      },
-      "text": "Some copy text that describes what this overlay is all about. Lorem ipsum dolor sit amet, consetetur sadipscing et justo."
+        "phone": "01762222222",
+        "email": "andi@mail.hier"
+      }
     }
   }
 }

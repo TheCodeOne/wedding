@@ -1,34 +1,33 @@
-<form class="form-example nx-margin-top-s">
+<form class="form-example">
 	<nx-natural-language-form [formGroup]="naturalForm" style="padding: 0">
 		<div>
-			{{ isSingle() ? 'Ich' : 'Wir' }} werden zur Feier
-			<nx-word size="regular" label="attend" style="width: 300px">
-				<nx-dropdown formControlName="attend" style="width: 300px">
+			<span class="text">{{ isSingle() ? 'Ich' : 'Wir' }} werde zur Feier</span>
+			<nx-word class="text" size="short" label="attend" style="width: 150px">
+				<nx-dropdown formControlName="attend" style="width: 150px">
 					<nx-dropdown-item value="{{ true }}">kommen</nx-dropdown-item>
-					<nx-dropdown-item value="{{ false }}">leider nicht kommen koennen</nx-dropdown-item>
+					<nx-dropdown-item value="{{ false }}">leider nicht kommen können</nx-dropdown-item>
 				</nx-dropdown>
-				<div nxError>deng?!</div>
 			</nx-word>
+			<span class="text">.</span>
 
 			<!-- SINGLE -->
 			<ng-container *ngIf="isSingle() && willAttend">
-				Ich werde
-				<nx-word size="long" label="plusOne">
+				<span class="text"> Ich werde</span>
+				<nx-word class="text" size="regular" label="plusOne">
 					<nx-dropdown formControlName="hasPlusOne">
 						<nx-dropdown-item value="false">alleine</nx-dropdown-item>
-						<nx-dropdown-item value="true">mit einer weiteren Person</nx-dropdown-item>
+						<nx-dropdown-item value="true">in Begleitung</nx-dropdown-item>
 					</nx-dropdown>
-					<div nxError>deng?!</div>
 				</nx-word>
-				kommen.
+				<span class="text"> kommen.</span>
 
 				<ng-container *ngIf="showPlusOnePhrase()">
-					Meine partnende Person heisst
-					<nx-word size="long" label="plusOne">
-						<input nxInput formControlName="plusOne" />
+					<span class="text"> Meine Begleitung heißt</span>
+					<nx-word class="text" size="regular" label="plusOne">
+						<input class="text" nxInput formControlName="plusOne" />
 						<div nxError>This field is required.</div>
 					</nx-word>
-					.
+					<span class="text">.</span>
 				</ng-container>
 			</ng-container>
 			<!-- SINGLE END -->

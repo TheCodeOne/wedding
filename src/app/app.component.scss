@@ -21,9 +21,8 @@
 	}
 }
 
-.greetings {
-	font-size: 20px;
-	line-height: 30px;
+.color-primary {
+	color: #813d7e !important;
 }
 
 nx-icon {
@@ -41,13 +40,13 @@ nx-icon.cdk-mouse-focused {
 }
 
 .stage {
-	background: rgba(69, 69, 69, 0.5);
+	background: rgba(142, 11, 138, 0.2);
 }
 
 .container {
 	display: flex;
 	align-items: center;
-	background-color: #0f2a3d;
+	background-color: '#3e213a9' !important;
 	justify-content: center;
 	height: 100vh;
 }
@@ -82,7 +81,7 @@ body {
 }
 
 .wave {
-	background: rgba(255, 255, 255, 0.1);
+	background: rgba(142, 11, 138, 0.1);
 	border-radius: 1000% 1000% 0 0;
 	position: fixed;
 	width: 200%;
