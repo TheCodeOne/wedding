@@ -1,13 +1,20 @@
 <div *ngIf="isStartingAnimation">
 	<div class="bubbles">
-		<div (click)="toggleAudio()" style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'clicker', Arial, Helvetica, Sans-serif; font-size: 40px">
+		<div (click)="enterApp()" style="cursor: pointer; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'clicker', Arial, Helvetica, Sans-serif; font-size: 40px">
 			<!-- nx grid-->
 			<div nxLayout="grid">
 				<div nxRow>
 					<div nxCol="12">
 						<div style="text-align: center">
 							<div style="font-size: 40px">Sofia & Dimitrios</div>
-							<div style="font-family: Arial, Helvetica, Sans-serif; font-size: 10px">{{ isAudioPlaying ? '🔇' : '🔊' }} {{ isAudioLoaded ? '' : '(20MB)' }}</div>
+							<!-- <div style="font-family: Arial, Helvetica, Sans-serif; font-size: 10px"><img src="assets/images/click.svg" alt="click here" /></div> -->
+						</div>
+					</div>
+				</div>
+				<div nxRow>
+					<div nxCol="12">
+						<div style="text-align: center">
+							<div [@fadeIn]="false" *ngIf="showClickIcon" style="height: 0px"><br /><br /><br /><img src="assets/images/click.svg" alt="click here" height="200px" /></div>
 						</div>
 					</div>
 				</div>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core'
+import { Component, ElementRef, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { ActivatedRoute, NavigationEnd, Params, Router, RouterEvent } from '@angular/router'
 import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/message'
 import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
@@ -13,7 +13,7 @@ enum ModalType {
 }
 
 function FadeIn(timingIn: number, height: boolean = false): AnimationTriggerMetadata {
-	return trigger('fadeIn', [transition(':enter', [style(height ? { opacity: 0, height: 0 } : { opacity: 0 }), animate(timingIn, style(height ? { opacity: 1, height: 'fit-content' } : { opacity: 1 }))])])
+	return trigger('fadeIn', [transition(':enter', [style(height ? { opacity: 0, height: 0 } : { opacity: 0 }), animate(timingIn, style(height ? { opacity: 1, height: '0' } : { opacity: 1 }))])])
 }
 
 @Component({
@@ -26,6 +26,12 @@ export class AppComponent {
 	@ViewChild(`${ModalType.CHILDREN}`) childrenAlternativeTemplateRef!: TemplateRef<any>
 	@ViewChild(`${ModalType.HOTEL}`) hotelTemplateRef!: TemplateRef<any>
 	@ViewChild(`${ModalType.BEST_MAN_MAID_OF_HONOR}`) bestManAndMaidOfHonorTemplateRef!: TemplateRef<any>
+	@HostListener('window:resize', ['$event'])
+	onResize() {
+		this.setBackGroundImage()
+		this.innerWidth = window.innerWidth
+	}
+	innerWidth = window.innerWidth
 	dialogRef!: NxModalRef<any>
 	showContent = false
 	isLoading = true
@@ -33,6 +39,7 @@ export class AppComponent {
 	audio = new Audio()
 	isAudioPlaying = false
 	isAudioLoaded = false
+	showClickIcon = false
 	readonly ModalType = ModalType
 	private _guests: any = {}
 
@@ -61,17 +68,15 @@ export class AppComponent {
 		// alone: 5b975dc4-d606-4331-bd44-eeb37b8ed247
 		// zwei : 5b975dc4-d606-4331-bd44-eeb37b8ed248
 		try {
+			this.startClickIconTimer()
 			this._guests = await this.api.getGuests(uuid)
-			console.log('loaded guests', this._guests)
 			if (localStorage.getItem('disableLoadingAnimation') !== 'true') {
-				document.body.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/assets/images/sofia_and_dimi.jpeg')"
 				this.isStartingAnimation = true
-				await this.sleep(7000)
+				this.setBackGroundImage()
+				// document.body.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/assets/images/sofia_and_dimi.jpeg')"
+			} else {
+				this.enterApp()
 			}
-			this.resetScene()
-			this.showContent = true
-			this.isStartingAnimation = false
-			this.isLoading = false
 		} catch (error) {
 			const myCustomOptions: NxMessageToastConfig = {
 				duration: 0,
@@ -82,8 +87,21 @@ export class AppComponent {
 		}
 	}
 
+	enterApp() {
+		this.resetScene()
+		this.showContent = true
+		this.isStartingAnimation = false
+		this.isLoading = false
+	}
+
 	getGuests() {
 		return this._guests
+	}
+
+	startClickIconTimer() {
+		setTimeout(() => {
+			this.showClickIcon = true
+		}, 4000)
 	}
 
 	openModal(type: ModalType): void {
@@ -137,5 +155,18 @@ export class AppComponent {
 		// remove background image from body
 		document.body.style.backgroundImage = 'none'
 		document.body.style.opacity = '1'
+	}
+
+	private setBackGroundImage() {
+		if (!this.isStartingAnimation) return
+		const imagePath = this.getImageByWidth()
+		document.body.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url(${imagePath})`
+	}
+
+	private getImageByWidth() {
+		if (this.innerWidth < 1180) {
+			return '/assets/images/sofia_and_dimi_2.jpg'
+		}
+		return '/assets/images/landscape.jpg'
 	}
 }
