@@ -1,6 +1,31 @@
 @import '@angular/cdk/overlay-prebuilt.css';
 @import '@angular/cdk/a11y-prebuilt.css';
 
+@media (max-width: 768px) {
+	.greetings {
+		margin: 0 4% !important;
+		font-size: 12px !important;
+		line-height: 20px !important;
+	}
+}
+
+@media (min-width: 769px) and (max-width: 1800px) {
+	.greetings {
+		margin: 0 20% !important;
+	}
+}
+
+@media (min-width: 1801px) {
+	.greetings {
+		margin: 0 35% !important;
+	}
+}
+
+.greetings {
+	font-size: 20px;
+	line-height: 30px;
+}
+
 nx-icon {
 	color: var(--interactive-primary, #27abd6);
 	vertical-align: middle;

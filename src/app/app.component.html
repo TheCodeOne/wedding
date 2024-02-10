@@ -92,7 +92,7 @@
 		<h1 nxHeadline="section" style="font-family: 'clicker'">{{ 'title.date' | translate }}</h1>
 		<h1 nxHeadline="section" style="font-family: 'clicker'">{{ 'title.text' | translate }}</h1>
 	</nx-small-stage>
-	<div nxLayout="grid">
+	<div class="greetings" nxLayout="grid">
 		<div nxRow>
 			<div nxCol="12">
 				<app-greeting [guests]="getGuests()"></app-greeting>
@@ -105,15 +105,16 @@
 		</div>
 		<div nxRow>
 			<div nxCol="12">
-				<div>
-					<a nxPlainButton (click)="openModal(ModalType.HOTEL)">{{ 'hotel.linkText' | translate }}</a>
-				</div>
-				<div>
-					<a nxPlainButton (click)="openModal(ModalType.BEST_MAN_MAID_OF_HONOR)">{{ 'trauzeugen.linkText' | translate }}</a>
-				</div>
-				<div>
-					<a nxPlainButton (click)="openModal(ModalType.CHILDREN)">{{ 'kinder.linkText' | translate }}</a>
-				</div>
+				<nx-icon name="info-circle"></nx-icon>&nbsp;<a nxPlainButton (click)="openModal(ModalType.BEST_MAN_MAID_OF_HONOR)">{{ 'trauzeugen.linkText' | translate }}</a>
+			</div>
+			<div nxCol="12">
+				<nx-icon name="info-circle"></nx-icon>&nbsp;<a nxPlainButton (click)="openModal(ModalType.HOTEL)">{{ 'hotel.linkText' | translate }}</a>
+			</div>
+			<div nxCol="12">
+				<nx-icon name="info-circle"></nx-icon>&nbsp;<a nxPlainButton (click)="openModal(ModalType.CHILDREN)">{{ 'kinder.linkText' | translate }}</a>
+			</div>
+			<div nxCol="12">
+				<nx-icon name="info-circle"></nx-icon>&nbsp;<a nxPlainButton (click)="openModal(ModalType.PRESENTS)">{{ 'presents.linkText' | translate }}</a>
 			</div>
 		</div>
 	</div>
@@ -133,7 +134,7 @@
 <ng-template #CHILDREN>
 	<div nxModalContent>
 		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">{{ 'kinder.title' | translate }}</h3>
-		<p nxCopytext class="nx-margin-bottom-m">{{ 'kinder.text' | translate }}</p>
+		<p nxCopytext="large" class="nx-margin-bottom-m" [innerHTML]="'kinder.text' | translate"></p>
 	</div>
 </ng-template>
 
@@ -141,14 +142,14 @@
 	<div nxModalContent>
 		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">{{ 'hotel.linkText' | translate }}</h3>
 
-		<p nxCopytext class="nx-margin-bottom-s nx-font-weight-bold">{{ 'hotel.intro' | translate }}</p>
-		<p nxCopytext class="nx-margin-bottom-m">
+		<p nxCopytext="large" class="nx-margin-bottom-s nx-font-weight-bold">{{ 'hotel.intro' | translate }}</p>
+		<p nxCopytext="large" class="nx-margin-bottom-s">
 			{{ 'hotel.intro2' | translate }}
 			<nx-link>
 				<a href="mailto:{{ 'hotel.email' | translate }}">{{ 'hotel.email' | translate }}</a>
 			</nx-link>
 		</p>
-		<p nxCopytext class="nx-margin-bottom-m" [innerHTML]="'hotel.intro3' | translate"></p>
+		<p nxCopytext="large" class="nx-margin-bottom-m" [innerHTML]="'hotel.intro3' | translate"></p>
 	</div>
 </ng-template>
 
@@ -170,7 +171,6 @@
 					<a href="mailto:{{ 'trauzeugen.kalina.kontakt.email' | translate }}">{{ 'trauzeugen.kalina.kontakt.email' | translate }}</a>
 				</nx-link>
 			</p>
-			<p nxCopytext="normal">{{ 'trauzeugen.kalina.text' | translate }}</p>
 		</nx-card>
 		<br />
 		<br />
@@ -188,7 +188,20 @@
 					<a href="mailto:{{ 'trauzeugen.andi.kontakt.email' | translate }}">{{ 'trauzeugen.andi.kontakt.email' | translate }}</a>
 				</nx-link>
 			</p>
-			<p nxCopytext="normal">{{ 'trauzeugen.andi.text' | translate }}</p>
 		</nx-card>
+	</div>
+</ng-template>
+
+<ng-template #PRESENTS>
+	<div nxModalContent>
+		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">{{ 'presents.linkText' | translate }}</h3>
+
+		<p nxCopytext="large" class="nx-margin-bottom-s nx-font-weight-bold">{{ 'presents.title' | translate }}</p>
+		<p nxCopytext="large" class="nx-margin-bottom-s">{{ 'presents.text' | translate }}</p>
+		<p nxHeadline="subsection-xsmall" class="nx-margin-bottom-m">
+			<nx-link>
+				<a target="_blank" href="{{ 'presents.paypal.link' | translate }}">{{ 'presents.paypal.name' | translate }}</a>
+			</nx-link>
+		</p>
 	</div>
 </ng-template>

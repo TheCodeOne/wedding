@@ -1,15 +1,16 @@
-import { Component, ElementRef, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core'
-import { ActivatedRoute, NavigationEnd, Params, Router, RouterEvent } from '@angular/router'
+import { AnimationTriggerMetadata, animate, style, transition, trigger } from '@angular/animations'
+import { Component, HostListener, TemplateRef, ViewChild } from '@angular/core'
+import { ActivatedRoute, Params } from '@angular/router'
 import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/message'
 import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
+import { Observable, filter, map, merge } from 'rxjs'
 import { ApiService } from './services/api.service'
-import { AnimationTriggerMetadata, animate, style, transition, trigger } from '@angular/animations'
-import { Observable, merge, filter, map } from 'rxjs'
 
 enum ModalType {
 	CHILDREN = 'CHILDREN',
 	HOTEL = 'HOTEL',
 	BEST_MAN_MAID_OF_HONOR = 'BEST_MAN_MAID_OF_HONOR',
+	PRESENTS = 'PRESENTS',
 }
 
 function FadeIn(timingIn: number, height: boolean = false): AnimationTriggerMetadata {
@@ -26,6 +27,7 @@ export class AppComponent {
 	@ViewChild(`${ModalType.CHILDREN}`) childrenAlternativeTemplateRef!: TemplateRef<any>
 	@ViewChild(`${ModalType.HOTEL}`) hotelTemplateRef!: TemplateRef<any>
 	@ViewChild(`${ModalType.BEST_MAN_MAID_OF_HONOR}`) bestManAndMaidOfHonorTemplateRef!: TemplateRef<any>
+	@ViewChild(`${ModalType.PRESENTS}`) presentsTemplateRef!: TemplateRef<any>
 	@HostListener('window:resize', ['$event'])
 	onResize() {
 		this.setBackGroundImage()
@@ -73,7 +75,6 @@ export class AppComponent {
 			if (localStorage.getItem('disableLoadingAnimation') !== 'true') {
 				this.isStartingAnimation = true
 				this.setBackGroundImage()
-				// document.body.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/assets/images/sofia_and_dimi.jpeg')"
 			} else {
 				this.enterApp()
 			}
@@ -109,6 +110,7 @@ export class AppComponent {
 			[ModalType.CHILDREN]: this.childrenAlternativeTemplateRef,
 			[ModalType.HOTEL]: this.hotelTemplateRef,
 			[ModalType.BEST_MAN_MAID_OF_HONOR]: this.bestManAndMaidOfHonorTemplateRef,
+			[ModalType.PRESENTS]: this.presentsTemplateRef,
 		}
 
 		this.dialogRef = this.dialogService.open(ModalTypeToTemplateRefMap[type], {
@@ -118,10 +120,6 @@ export class AppComponent {
 
 	closeDialog() {
 		this.dialogRef.close()
-	}
-
-	private sleep(ms: number) {
-		return new Promise(resolve => setTimeout(resolve, ms))
 	}
 
 	toggleAudio() {
