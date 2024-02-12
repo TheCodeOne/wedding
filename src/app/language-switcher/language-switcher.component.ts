@@ -25,6 +25,6 @@ export class LanguageSwitcherComponent {
 			en: '🇺🇸',
 			gr: '🇬🇷',
 		}
-		return languageToFlagMappping[this.translate.currentLang] || '🤷‍♀️'
+		return languageToFlagMappping[this.translate.currentLang] || '🇩🇪'
 	}
 }
