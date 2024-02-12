@@ -69,6 +69,9 @@
       "link": "http://www.paypal.me/DimitriosKokkonias"
     }
   },
-  "successMessage": "Danke liebe rueckmeldende Person:Innen für die Rückmeldung 😊",
-  "subscribe": "Aktivire Benachritigungen (kein Spam)"
+  "trauzeugen": {
+    "linkText": "Trauzeug:Innen",
+    "title": "Trauzeugen:Innen"
+  },
+  "successMessage": "Danke liebe rueckmeldende Person:Innen für die Rückmeldung 😊"
 }

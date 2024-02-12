@@ -71,22 +71,7 @@
   },
   "trauzeugen": {
     "linkText": "Trauzeugen",
-    "title": "Trauzeugen",
-    "kalina": {
-      "name": "Kalina Haack",
-      "kontakt": {
-        "phone": "0176 12345678",
-        "email": "kalinas@mail.hier"
-      }
-    },
-    "andi": {
-      "name": "Andreas Menge",
-      "kontakt": {
-        "phone": "01762222222 12345678",
-        "email": "andi@mail.hier"
-      }
-    }
+    "title": "Trauzeugen"
   },
-  "successMessage": "Danke für die Rückmeldung 😊",
-  "subscribe": "Aktivire Benachritigungen (kein Spam)"
+  "successMessage": "Danke für die Rückmeldung 😊"
 }

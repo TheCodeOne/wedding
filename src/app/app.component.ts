@@ -50,7 +50,6 @@ export class AppComponent implements OnInit {
 	codeInputValue = ''
 	codeForm!: FormGroup
 	readonly ModalType = ModalType
-	readonly VAPID_PUBLIC_KEY = 'BHJEs-TX4la7r8zKkKye2viwnfBTdyisftbOlkMSFea5THRWKku720UpBDR2VpG1YDVCo9r7SQkpR37SfbNZa4s'
 	private _guests: any = {}
 	private myCustomOptions: NxMessageToastConfig = {
 		duration: 5000,
@@ -66,7 +65,7 @@ export class AppComponent implements OnInit {
 				updateOn: 'change',
 			}),
 		})
-		this.subscribeToNotifications()
+
 		const uuid = localStorage.getItem('uuid')
 		if (uuid) {
 			this.init({ value: uuid, isUuid: true })
@@ -109,18 +108,6 @@ export class AppComponent implements OnInit {
 	toggleLoadingAnimation() {
 		const currentState = localStorage.getItem('disableLoadingAnimation')
 		localStorage.setItem('disableLoadingAnimation', currentState === 'true' ? 'false' : 'true')
-	}
-
-	subscribeToNotifications() {
-		this.swPush
-			.requestSubscription({
-				serverPublicKey: this.VAPID_PUBLIC_KEY,
-			})
-			.then(async sub => {
-				await this.api.addSubscription(sub)
-				console.log(sub)
-			})
-			.catch(err => console.error('Could not subscribe to notifications', err))
 	}
 
 	async init({ value, isUuid }: { value: string; isUuid: boolean }) {

@@ -71,22 +71,7 @@
   },
   "trauzeugen": {
     "linkText": "Maid of honor & Best man",
-    "title": "Maid of honor & Best man",
-    "kalina": {
-      "name": "Kalina Haack",
-      "contact": {
-        "phone": "0176 12345678",
-        "email": "kalinas@mail.hier"
-      }
-    },
-    "andi": {
-      "name": "Andreas Menge",
-      "contact": {
-        "phone": "01762222222",
-        "email": "andi@mail.hier"
-      }
-    }
+    "title": "Maid of honor & Best man"
   },
-  "successMessage": "Thanks for your response 😊",
-  "subscribe": "Activate Notifications (no Spam)"
+  "successMessage": "Thanks for your response 😊"
 }
