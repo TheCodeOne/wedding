@@ -73,5 +73,9 @@
     "linkText": "Maid of honor & Best man",
     "title": "Maid of honor & Best man"
   },
-  "successMessage": "Thanks for your response 😊"
+  "successMessage": "Thanks for your response 😊",
+  "loadingAnimation": {
+    "show": "Enable starting animation",
+    "hide": "Disable starting animation"
+  }
 }

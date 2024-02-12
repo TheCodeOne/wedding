@@ -73,5 +73,9 @@
     "linkText": "Trauzeug:Innen",
     "title": "Trauzeugen:Innen"
   },
-  "successMessage": "Danke liebe rueckmeldende Person:Innen für die Rückmeldung 😊"
+  "successMessage": "Danke liebe rueckmeldende Person:Innen für die Rückmeldung 😊",
+  "loadingAnimation": {
+    "show": "Startanimation:In aktivieren",
+    "hide": "Startanimation:In deaktivieren"
+  }
 }

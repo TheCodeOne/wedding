@@ -73,5 +73,9 @@
     "linkText": "Trauzeugen",
     "title": "Trauzeugen"
   },
-  "successMessage": "Danke für die Rückmeldung 😊"
+  "successMessage": "Danke für die Rückmeldung 😊",
+  "loadingAnimation": {
+    "show": "Startanimation aktivieren",
+    "hide": "Startanimation deaktivieren"
+  }
 }

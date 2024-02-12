@@ -111,8 +111,8 @@ export class AppComponent implements OnInit {
 		return this.codeForm.get('keyCode')
 	}
 
-	get loadingAnimationText() {
-		return localStorage.getItem('disableLoadingAnimation') === 'true' ? 'Enable starting animation' : 'Disable starting animation'
+	get showLoadingAnimation(): boolean {
+		return localStorage.getItem('disableLoadingAnimation') === 'false'
 	}
 
 	toggleLoadingAnimation() {
@@ -249,10 +249,11 @@ export class AppComponent implements OnInit {
 	private showDebug() {
 		const value = this.debugSubject.getValue()
 		this.debugSubject.next(value + 1)
-		console.log(value)
+
 		if (value === 5) {
 			this.openModal(ModalType.DEBUG)
 		}
+
 		this.startDebugCountdown()
 	}
 
