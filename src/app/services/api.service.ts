@@ -69,4 +69,8 @@ export class ApiService {
 	getUuidByCode(code: string): any {
 		return this.http.get(`${backendUrl}/code/${code.toLocaleLowerCase()}`)
 	}
+
+	async getVersion(): Promise<{ version: string }> {
+		return (await lastValueFrom(this.http.get(`${backendUrl}/version`))) as { version: string }
+	}
 }

@@ -5,7 +5,7 @@ import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/m
 import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
 import { Observable, filter, lastValueFrom, map, merge } from 'rxjs'
 import { ApiService, PrivateData } from './services/api.service'
-import { SwPush } from '@angular/service-worker'
+import packageJson from '../../package.json'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { TranslateService } from '@ngx-translate/core'
@@ -114,6 +114,7 @@ export class AppComponent implements OnInit {
 	async init({ value, isUuid }: { value: string; isUuid: boolean }) {
 		try {
 			let uuid
+			this.postVersions()
 			this.startClickIconTimer()
 			if (!isUuid) {
 				const response = (await lastValueFrom(this.api.getUuidByCode(value))) as { uuid: string }
@@ -212,5 +213,16 @@ export class AppComponent implements OnInit {
 	private setBackGroundImage() {
 		if (!this.isStartingAnimation) return
 		document.body.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/assets/images/sofia_and_dimi.jpeg')`
+	}
+
+	private async postVersions() {
+		const frontendVersion: string = packageJson.version
+		const { version: backendVersion } = await this.api.getVersion()
+		const styleGreen = 'color:white; background:#28d79f'
+		const stylePink = 'color:white; background:#B14D9A'
+		const stylePurple = 'color:white; background:#2B3060'
+		const styleOrange = 'color:white; background:#f48042'
+		console.log(`%c 🤵‍♀️👰🏻‍♂️ %c KokkSlat %c kokkslat-wedding Frontend %c v${frontendVersion} `, styleGreen, stylePink, stylePurple, styleOrange)
+		console.log(`%c 🤵‍♀️👰🏻‍♂️ %c KokkSlat %c kokkslat-wedding API      %c v${backendVersion} `, styleGreen, stylePink, stylePurple, styleOrange)
 	}
 }
