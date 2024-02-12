@@ -15,7 +15,7 @@ interface Data {
 	email: string
 }
 
-interface Guests {
+export interface Guests {
 	uuid: string
 	guests: [
 		{
@@ -25,6 +25,8 @@ interface Guests {
 	]
 	willAttend: boolean
 	isPlusOneEligable: boolean
+	code: string
+	language: string
 }
 
 interface UpdateGuests {
@@ -65,6 +67,6 @@ export class ApiService {
 	}
 
 	getUuidByCode(code: string): any {
-		return this.http.get(`${backendUrl}/code/${code}`)
+		return this.http.get(`${backendUrl}/code/${code.toLocaleLowerCase()}`)
 	}
 }

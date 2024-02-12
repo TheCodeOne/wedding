@@ -81,9 +81,9 @@
 	<div nxLayout="grid">
 		<div nxRow>
 			<div nxCol="6" colOffset="0" style="cursor: pointer" (click)="toggleLoadingAnimation()">{{ loadingAnimationText }}</div>
-			<div nxCol="3" colOffset="0" style="cursor: pointer" (click)="toggleAudio()">{{ isAudioPlaying ? '🔇' : '🔊' }} {{ isAudioLoaded ? '' : '(20MB)' }}</div>
+			<div nxCol="3" colOffset="0" style="cursor: pointer" (click)="toggleAudio()">{{ isAudioPlaying ? '🔇' : '🔊' }}</div>
 			<div nxCol="2" colOffset="1">
-				<app-language-switcher></app-language-switcher>
+				<app-language-switcher [guests]="getGuests()"></app-language-switcher>
 			</div>
 		</div>
 	</div>

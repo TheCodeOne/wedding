@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { getGuestName } from '../utils'
+import { Guests } from '../services/api.service'
 
 @Component({
 	selector: 'app-greeting',
@@ -7,7 +8,7 @@ import { getGuestName } from '../utils'
 	styleUrls: ['./greeting.component.scss'],
 })
 export class GreetingComponent {
-	@Input() guests: any = {}
+	@Input() guests: Guests = {} as Guests
 
 	getName(gender: string) {
 		return getGuestName(this.guests, gender)

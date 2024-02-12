@@ -8,6 +8,7 @@ import { ApiService, PrivateData } from './services/api.service'
 import { SwPush } from '@angular/service-worker'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import { TranslateService } from '@ngx-translate/core'
 
 enum ModalType {
 	CHILDREN = 'CHILDREN',
@@ -56,7 +57,7 @@ export class AppComponent implements OnInit {
 		context: 'info',
 	}
 
-	constructor(readonly dialogService: NxDialogService, private api: ApiService, private activatedRoute: ActivatedRoute, private messageToastService: NxMessageToastService, private swPush: SwPush, private router: Router) {}
+	constructor(readonly dialogService: NxDialogService, private api: ApiService, private activatedRoute: ActivatedRoute, private messageToastService: NxMessageToastService, private router: Router, private translateService: TranslateService) {}
 
 	ngOnInit(): void {
 		this.codeForm = new FormGroup({
@@ -181,11 +182,9 @@ export class AppComponent implements OnInit {
 
 	toggleAudio() {
 		if (this.audio.paused) {
-			if (!this.isAudioLoaded) {
-				this.audio.src = '/assets/Bridal-chorus.wav'
-				this.audio.load()
-				this.isAudioLoaded = true
-			}
+			this.audio.src = this.translateService.currentLang === 'lol' ? '/assets/sounds/shitty_flute.mp3' : '/assets/sounds/bridal_chorus.mp3'
+			this.audio.load()
+			this.isAudioLoaded = true
 			this.audio.play()
 			this.isAudioPlaying = true
 		} else {
