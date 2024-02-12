@@ -3,7 +3,7 @@ import { Component, HostListener, OnInit, TemplateRef, ViewChild } from '@angula
 import { ActivatedRoute, Params } from '@angular/router'
 import { NxMessageToastConfig, NxMessageToastService } from '@aposin/ng-aquila/message'
 import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal'
-import { Observable, filter, lastValueFrom, map, merge } from 'rxjs'
+import { BehaviorSubject, Observable, Subject, debounceTime, filter, lastValueFrom, map, merge } from 'rxjs'
 import { ApiService, PrivateData } from './services/api.service'
 import packageJson from '../../package.json'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
@@ -15,6 +15,7 @@ enum ModalType {
 	HOTEL = 'HOTEL',
 	BEST_MAN_MAID_OF_HONOR = 'BEST_MAN_MAID_OF_HONOR',
 	PRESENTS = 'PRESENTS',
+	DEBUG = 'DEBUG',
 }
 
 function FadeIn(timingIn: number, height: boolean = false): AnimationTriggerMetadata {
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit {
 	@ViewChild(`${ModalType.HOTEL}`) hotelTemplateRef!: TemplateRef<any>
 	@ViewChild(`${ModalType.BEST_MAN_MAID_OF_HONOR}`) bestManAndMaidOfHonorTemplateRef!: TemplateRef<any>
 	@ViewChild(`${ModalType.PRESENTS}`) presentsTemplateRef!: TemplateRef<any>
+	@ViewChild(`${ModalType.DEBUG}`) debugTemplateRef!: TemplateRef<any>
 	@HostListener('window:resize', ['$event'])
 	onResize() {
 		this.setBackGroundImage()
@@ -49,10 +51,13 @@ export class AppComponent implements OnInit {
 	codeSucessfullyEntered = false
 	privateData: PrivateData = {} as PrivateData
 	codeInputValue = ''
+	backendVersion = ''
+	frontendVersion = ''
 	codeForm!: FormGroup
 	readonly ModalType = ModalType
 	private _guests: any = {}
-	private myCustomOptions: NxMessageToastConfig = {
+	private debugSubject = new BehaviorSubject<number>(0)
+	private snackbarOptions: NxMessageToastConfig = {
 		duration: 5000,
 		context: 'info',
 	}
@@ -82,6 +87,10 @@ export class AppComponent implements OnInit {
 				this.isLoading = false
 				this.showContent = false
 			}
+
+			this.debugSubject.pipe(debounceTime(3000)).subscribe(() => {
+				console.log('ja')
+			})
 		})
 
 		this.codeForm.valueChanges.subscribe(async value => {
@@ -91,7 +100,7 @@ export class AppComponent implements OnInit {
 					this.init({ value: uuid, isUuid: true })
 					this.codeSucessfullyEntered = true
 				} catch (error: any) {
-					this.messageToastService.open(error.error.message, this.myCustomOptions)
+					this.messageToastService.open(error.error.message, this.snackbarOptions)
 					this.codeSucessfullyEntered = false
 				}
 			}
@@ -107,6 +116,7 @@ export class AppComponent implements OnInit {
 	}
 
 	toggleLoadingAnimation() {
+		this.showDebug()
 		const currentState = localStorage.getItem('disableLoadingAnimation')
 		localStorage.setItem('disableLoadingAnimation', currentState === 'true' ? 'false' : 'true')
 	}
@@ -138,7 +148,7 @@ export class AppComponent implements OnInit {
 				queryParamsHandling: 'merge',
 			})
 		} catch (error) {
-			this.messageToastService.open('Invitation link seems to be unknown. Contact Sofia or Dimi 🤷‍♀️', this.myCustomOptions)
+			this.messageToastService.open('Invitation link seems to be unknown. Contact Sofia or Dimi 🤷‍♀️', this.snackbarOptions)
 			console.log(error)
 		}
 	}
@@ -170,10 +180,14 @@ export class AppComponent implements OnInit {
 			[ModalType.HOTEL]: this.hotelTemplateRef,
 			[ModalType.BEST_MAN_MAID_OF_HONOR]: this.bestManAndMaidOfHonorTemplateRef,
 			[ModalType.PRESENTS]: this.presentsTemplateRef,
+			[ModalType.DEBUG]: this.debugTemplateRef,
 		}
 
 		this.dialogRef = this.dialogService.open(ModalTypeToTemplateRefMap[type], {
 			showCloseIcon: true,
+		})
+		this.dialogRef.afterClosed().subscribe(() => {
+			this.debugSubject.next(0)
 		})
 	}
 
@@ -192,6 +206,10 @@ export class AppComponent implements OnInit {
 			this.audio.pause()
 			this.isAudioPlaying = false
 		}
+	}
+
+	intentDebug() {
+		console.log('ja')
 	}
 
 	private get finalQueryParams$(): Observable<Params> {
@@ -218,11 +236,29 @@ export class AppComponent implements OnInit {
 	private async postVersions() {
 		const frontendVersion: string = packageJson.version
 		const { version: backendVersion } = await this.api.getVersion()
+		this.backendVersion = backendVersion
+		this.frontendVersion = frontendVersion
 		const styleGreen = 'color:white; background:#28d79f'
 		const stylePink = 'color:white; background:#B14D9A'
 		const stylePurple = 'color:white; background:#2B3060'
 		const styleOrange = 'color:white; background:#f48042'
 		console.log(`%c 🤵‍♀️👰🏻‍♂️ %c KokkSlat %c kokkslat-wedding Frontend %c v${frontendVersion} `, styleGreen, stylePink, stylePurple, styleOrange)
 		console.log(`%c 🤵‍♀️👰🏻‍♂️ %c KokkSlat %c kokkslat-wedding API      %c v${backendVersion} `, styleGreen, stylePink, stylePurple, styleOrange)
+	}
+
+	private showDebug() {
+		const value = this.debugSubject.getValue()
+		this.debugSubject.next(value + 1)
+		console.log(value)
+		if (value === 5) {
+			this.openModal(ModalType.DEBUG)
+		}
+		this.startDebugCountdown()
+	}
+
+	private startDebugCountdown() {
+		setTimeout(() => {
+			this.debugSubject.next(0)
+		}, 5000)
 	}
 }

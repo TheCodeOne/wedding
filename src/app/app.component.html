@@ -223,3 +223,15 @@
 		</p>
 	</div>
 </ng-template>
+
+<ng-template #DEBUG>
+	<div nxModalContent>
+		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">Debug</h3>
+
+		<p nxCopytext="large" class="nx-margin-bottom-s nx-font-weight-bold">Guests:</p>
+		<pre>{{ getGuests() | json }}</pre>
+
+		<p nxCopytext="large" class="nx-margin-bottom-s nx-font-weight-bold">Frontend: {{ frontendVersion }}</p>
+		<p nxCopytext="large" class="nx-margin-bottom-s nx-font-weight-bold">Backend: {{ backendVersion }}</p>
+	</div>
+</ng-template>
