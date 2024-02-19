@@ -128,6 +128,7 @@ export class AppComponent implements OnInit {
 			this.startClickIconTimer()
 			if (!isUuid) {
 				const response = (await lastValueFrom(this.api.getUuidByCode(value))) as { uuid: string }
+				this.codeSucessfullyEntered = true
 				uuid = response.uuid
 			} else {
 				uuid = value
