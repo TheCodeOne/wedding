@@ -15,12 +15,13 @@
   "greeting": {
     "plusOneEligable": {
       "intro": "We cordially invite you to celebrate our wedding with us on 01.06.2024.",
-      "intro2": "The celebration will take place starting at 5:00 PM at Cantine Royale, Mercedesstraße 3, 70372 Stuttgart.",
+      "intro2": "The celebration will take place starting at 5:00 PM at ",
       "intro3": "Please let us know by 30.03.2024 if you are coming."
     },
     "intro": "We cordially invite you to celebrate our wedding with us on 01.06.2024.",
-    "intro2": "The celebration will take place starting at 5:00 PM at Cantine Royale, Mercedesstraße 3, 70372 Stuttgart.",
-    "intro3": "Please let us know by 30.03.2024 if you are coming."
+    "intro2": "The celebration will take place starting at 5:00 PM at ",
+    "intro3": "Please let us know by 30.03.2024 if you are coming.",
+    "location": "Cantine Royale, Mercedesstraße 3, 70372 Stuttgart"
   },
   "form": {
     "first": {
