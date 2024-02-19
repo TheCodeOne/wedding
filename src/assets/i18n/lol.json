@@ -25,7 +25,7 @@
   },
   "form": {
     "first": {
-      "text": "Wir werden zur Feier kommen",
+      "text": "Wir werden zur Feier",
       "options": {
         "yes": "kommen",
         "no": "leider nicht kommen können"
@@ -33,7 +33,7 @@
     },
     "plusOneEligable": {
       "first": {
-        "text": "Ich werde zur Feier kommen",
+        "text": "Ich werde zur Feier",
         "options": {
           "yes": "kommen",
           "no": "leider nicht kommen können"
