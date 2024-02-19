@@ -1,6 +1,6 @@
 {
   "name": "KokkSlat Hochzeit",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
