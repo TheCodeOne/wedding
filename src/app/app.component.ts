@@ -87,10 +87,6 @@ export class AppComponent implements OnInit {
 				this.isLoading = false
 				this.showContent = false
 			}
-
-			this.debugSubject.pipe(debounceTime(3000)).subscribe(() => {
-				console.log('ja')
-			})
 		})
 
 		this.codeForm.valueChanges.subscribe(async value => {
@@ -207,10 +203,6 @@ export class AppComponent implements OnInit {
 			this.audio.pause()
 			this.isAudioPlaying = false
 		}
-	}
-
-	intentDebug() {
-		console.log('ja')
 	}
 
 	private get finalQueryParams$(): Observable<Params> {
