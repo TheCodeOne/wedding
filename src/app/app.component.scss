@@ -25,6 +25,15 @@
 	color: #813d7e !important;
 }
 
+ul {
+	list-style-type: none;
+}
+
+.scroll-container {
+	overflow-x: auto;
+	display: block;
+}
+
 nx-icon {
 	color: var(--interactive-primary, #27abd6);
 	vertical-align: middle;

@@ -16,6 +16,7 @@ enum ModalType {
 	BEST_MAN_MAID_OF_HONOR = 'BEST_MAN_MAID_OF_HONOR',
 	PRESENTS = 'PRESENTS',
 	DEBUG = 'DEBUG',
+	SCHEDULE = 'SCHEDULE',
 }
 
 function FadeIn(timingIn: number, height: boolean = false): AnimationTriggerMetadata {
@@ -34,6 +35,7 @@ export class AppComponent implements OnInit {
 	@ViewChild(`${ModalType.BEST_MAN_MAID_OF_HONOR}`) bestManAndMaidOfHonorTemplateRef!: TemplateRef<any>
 	@ViewChild(`${ModalType.PRESENTS}`) presentsTemplateRef!: TemplateRef<any>
 	@ViewChild(`${ModalType.DEBUG}`) debugTemplateRef!: TemplateRef<any>
+	@ViewChild(`${ModalType.SCHEDULE}`) scheduleTemplateRef!: TemplateRef<any>
 	@HostListener('window:resize', ['$event'])
 	onResize() {
 		this.setBackGroundImage()
@@ -187,6 +189,7 @@ export class AppComponent implements OnInit {
 			[ModalType.BEST_MAN_MAID_OF_HONOR]: this.bestManAndMaidOfHonorTemplateRef,
 			[ModalType.PRESENTS]: this.presentsTemplateRef,
 			[ModalType.DEBUG]: this.debugTemplateRef,
+			[ModalType.SCHEDULE]: this.scheduleTemplateRef,
 		}
 
 		this.dialogRef = this.dialogService.open(ModalTypeToTemplateRefMap[type], {

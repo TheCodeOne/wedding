@@ -118,6 +118,7 @@
 			<div nxCol="12">
 				<nx-icon class="color-primary" name="info-circle"></nx-icon>&nbsp;<a class="color-primary" nxPlainButton (click)="openModal(ModalType.PRESENTS)">{{ 'presents.linkText' | translate }}</a>
 			</div>
+			<div nxCol="12" *ngIf="getGuests().innerCircle"><nx-icon class="color-primary" name="info-circle"></nx-icon>&nbsp;<a class="color-primary" nxPlainButton (click)="openModal(ModalType.SCHEDULE)">Ablaufplan</a></div>
 		</div>
 	</div>
 </div>
@@ -223,14 +224,161 @@
 	</div>
 </ng-template>
 
-<ng-template #DEBUG>
+<ng-template #SCHEDULE>
 	<div nxModalContent>
-		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">Debug</h3>
+		<div class="scroll-container">
+			<table nxTable condensed>
+				<thead>
+					<tr nxTableRow>
+						<th nxHeaderCell>Zeit</th>
+						<th nxHeaderCell>Aktion</th>
+						<th nxHeaderCell>Beteiligte</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr nxTableRow>
+						<td nxTableCell>
+							10:00<br />
+							12:00
+						</td>
+						<td nxTableCell>Getting Ready</td>
+						<td nxTableCell>
+							<ul>
+								<li>Dimi daheim</li>
+								<li>Sofia bei Kalina</li>
+							</ul>
+						</td>
+					</tr>
 
-		<p nxCopytext="large" class="nx-margin-bottom-s nx-font-weight-bold">Guests:</p>
-		<pre>{{ getGuests() | json }}</pre>
+					<tr nxTableRow>
+						<td nxTableCell>
+							12:00<br />
+							12:30
+						</td>
+						<td nxTableCell>Fahrt zum Standesamt</td>
+						<td nxTableCell>
+							<ul>
+								<li>Dimi daheim</li>
+								<li>Sofia bei Kalina</li>
+							</ul>
+						</td>
+					</tr>
 
-		<p nxCopytext="large" class="nx-margin-bottom-s nx-font-weight-bold">Frontend: {{ frontendVersion }}</p>
-		<p nxCopytext="large" class="nx-margin-bottom-s nx-font-weight-bold">Backend: {{ backendVersion }}</p>
+					<tr nxTableRow>
+						<td nxTableCell>
+							13:00<br />
+							14:00
+						</td>
+						<td nxTableCell>Trauung</td>
+						<td nxTableCell>
+							<ul>
+								<li>Brautpaar</li>
+								<li>Trauzeugen</li>
+								<li>Familie und Freunde</li>
+							</ul>
+						</td>
+					</tr>
+
+					<tr nxTableRow>
+						<td nxTableCell>
+							14:00<br />
+							14:30
+						</td>
+						<td nxTableCell>Draussen bissle chillen</td>
+						<td nxTableCell>
+							<ul>
+								<li>Brautpaar</li>
+								<li>Trauzeugen</li>
+								<li>Familie und Freunde</li>
+							</ul>
+						</td>
+					</tr>
+
+					<tr nxTableRow>
+						<td nxTableCell>
+							14:30<br />
+							14:45
+						</td>
+						<td nxTableCell>Zur Fotolocation fahren</td>
+						<td nxTableCell>
+							<ul>
+								<li>Brautpaar</li>
+								<li>Fotografin</li>
+							</ul>
+						</td>
+					</tr>
+
+					<tr nxTableRow>
+						<td nxTableCell>
+							14:45<br />
+							15:30
+						</td>
+						<td nxTableCell>Fotos machen</td>
+						<td nxTableCell>
+							<ul>
+								<li>Brautpaar</li>
+								<li>Fotografin</li>
+							</ul>
+						</td>
+					</tr>
+
+					<tr nxTableRow>
+						<td nxTableCell>
+							14:30<br />
+							15:30
+						</td>
+						<td nxTableCell>Location vorbereiten</td>
+						<td nxTableCell>
+							<ul>
+								<li>Trauzeugen</li>
+								<li>Familie und Freunde</li>
+							</ul>
+						</td>
+					</tr>
+
+					<tr nxTableRow>
+						<td nxTableCell>
+							14:30<br />
+							15:30
+						</td>
+						<td nxTableCell>Fotos machen</td>
+						<td nxTableCell>
+							<ul>
+								<li>Brautpaar</li>
+								<li>Fotografin</li>
+							</ul>
+						</td>
+					</tr>
+
+					<tr nxTableRow>
+						<td nxTableCell>
+							14:30<br />
+							15:30
+						</td>
+						<td nxTableCell>Fotos machen</td>
+						<td nxTableCell>
+							<ul>
+								<li>Brautpaar</li>
+								<li>Fotografin</li>
+							</ul>
+						</td>
+					</tr>
+
+					<tr nxTableRow>
+						<td nxTableCell>
+							14:30<br />
+							15:30
+						</td>
+						<td nxTableCell>Fotos machen</td>
+						<td nxTableCell>
+							<ul>
+								<li>Brautpaar</li>
+								<li>Fotografin</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </ng-template>
