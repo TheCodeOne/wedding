@@ -72,6 +72,8 @@ export class AppComponent implements OnInit {
 			}),
 		})
 
+		this.setInitialLoadingState()
+
 		const uuid = localStorage.getItem('uuid')
 		if (uuid) {
 			this.init({ value: uuid, isUuid: true })
@@ -105,6 +107,12 @@ export class AppComponent implements OnInit {
 
 	get keyCode() {
 		return this.codeForm.get('keyCode')
+	}
+
+	setInitialLoadingState() {
+		if (!localStorage.getItem('disableLoadingAnimation')) {
+			localStorage.setItem('disableLoadingAnimation', 'false')
+		}
 	}
 
 	get showLoadingAnimation(): boolean {
