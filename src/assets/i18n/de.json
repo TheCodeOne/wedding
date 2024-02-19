@@ -8,15 +8,20 @@
     "date": "01.06.2024",
     "text": "Einladung"
   },
+  "location": {
+    "title": "Location",
+    "text": "Auf Google Maps anschauen"
+  },
   "greeting": {
     "plusOneEligable": {
       "intro": "Wir laden Dich herzlich dazu ein, mit uns am 01.06.2024 unsere Hochzeit zu feiern.",
-      "intro2": "Die Feier findet ab 17:00 Uhr in der Cantine Royale, Mercedesstraße 3, 70372 Stuttgart statt.",
+      "intro2": "Die Feier findet ab 17:00 Uhr hier statt:",
       "intro3": "Bitte gib uns bis 30.03.2024 Bescheid, ob Du kommst."
     },
     "intro": "Wir laden euch herzlich dazu ein, mit uns am 01.06.2024 unsere Hochzeit zu feiern.",
-    "intro2": "Die Feier findet ab 17:00 Uhr in der Cantine Royale, Mercedesstraße 3, 70372 Stuttgart statt.",
-    "intro3": "Bitte gebt uns bis 30.03.2024 Bescheid, ob ihr kommt."
+    "intro2": "Die Feier findet ab 17:00 Uhr hier statt:",
+    "intro3": "Bitte gebt uns bis 30.03.2024 Bescheid, ob ihr kommt.",
+    "location": "Cantine Royale, Mercedesstraße 3, 70372 Stuttgart"
   },
   "form": {
     "first": {

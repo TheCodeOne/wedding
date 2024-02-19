@@ -8,6 +8,10 @@
     "date": "01.06.2024",
     "text": "Invitation"
   },
+  "location": {
+    "title": "Location",
+    "text": "Check on Google Maps"
+  },
   "greeting": {
     "plusOneEligable": {
       "intro": "We cordially invite you to celebrate our wedding with us on 01.06.2024.",

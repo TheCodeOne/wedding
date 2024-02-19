@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common'
 import { HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http'
 import { NgModule, isDevMode } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -5,7 +6,9 @@ import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule } from '@angular/router'
 import { NxButtonModule } from '@aposin/ng-aquila/button'
+import { NxCardModule } from '@aposin/ng-aquila/card'
 import { NxCheckboxModule } from '@aposin/ng-aquila/checkbox'
+import { NxCodeInputModule } from '@aposin/ng-aquila/code-input'
 import { NxDocumentationIconModule } from '@aposin/ng-aquila/documentation-icons'
 import { NxDropdownModule } from '@aposin/ng-aquila/dropdown'
 import { NxFooterModule } from '@aposin/ng-aquila/footer'
@@ -17,20 +20,18 @@ import { NxInputModule } from '@aposin/ng-aquila/input'
 import { NxLinkModule } from '@aposin/ng-aquila/link'
 import { NxMessageModule } from '@aposin/ng-aquila/message'
 import { NxModalModule } from '@aposin/ng-aquila/modal'
+import { NxNaturalLanguageFormModule } from '@aposin/ng-aquila/natural-language-form'
 import { NxOverlayModule } from '@aposin/ng-aquila/overlay'
 import { NxPopoverModule } from '@aposin/ng-aquila/popover'
 import { NxSmallStageModule } from '@aposin/ng-aquila/small-stage'
-import { NxNaturalLanguageFormModule } from '@aposin/ng-aquila/natural-language-form'
-import { NxCardModule } from '@aposin/ng-aquila/card'
-import { NxCodeInputModule } from '@aposin/ng-aquila/code-input'
 
-import { AppComponent } from './app.component'
+import { ServiceWorkerModule } from '@angular/service-worker'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { AppComponent } from './app.component'
+import { GreetingComponent } from './greeting/greeting.component'
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component'
 import { NaturalFormComponent } from './natural-form/natural-form.component'
-import { GreetingComponent } from './greeting/greeting.component'
-import { ServiceWorkerModule } from '@angular/service-worker'
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http)
@@ -65,6 +66,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NxNaturalLanguageFormModule,
 		NxCardModule,
 		NxCodeInputModule,
+		NgOptimizedImage,
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,

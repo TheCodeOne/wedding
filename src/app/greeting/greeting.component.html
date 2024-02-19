@@ -5,12 +5,30 @@
 
 <ng-container *ngIf="isSingle()">
 	<p class="text" nxCopytext="normal">{{ 'greeting.plusOneEligable.intro' | translate }}</p>
-	<p class="text" nxCopytext="normal">{{ 'greeting.plusOneEligable.intro2' | translate }}</p>
+	<p class="text" nxCopytext="normal">{{ 'greeting.plusOneEligable.intro2' | translate }} <ng-container *ngTemplateOutlet="LOCATION"></ng-container></p>
 	<p class="text" nxCopytext="normal">{{ 'greeting.plusOneEligable.intro3' | translate }}</p>
 </ng-container>
 
 <ng-container *ngIf="!isSingle()">
-	<p>{{ 'greeting.intro' | translate }}</p>
-	<p class="text" nxCopytext="normal">{{ 'greeting.intro2' | translate }}</p>
+	<p class="text" nxCopytext="normal">{{ 'greeting.intro' | translate }}</p>
+	<p class="text" nxCopytext="normal">{{ 'greeting.intro2' | translate }} <ng-container *ngTemplateOutlet="LOCATION"></ng-container></p>
 	<p class="text" nxCopytext="normal">{{ 'greeting.intro3' | translate }}</p>
 </ng-container>
+
+<ng-template #LOCATION>
+	<a class="color-primary" nxPlainButton (click)="openModal()">{{ 'greeting.location' | translate }}</a>
+</ng-template>
+
+<ng-template #LOCATION_INFO>
+	<div nxModalContent>
+		<h3 nxHeadline="subsection-medium" class="nx-margin-bottom-3m">{{ 'location.title' | translate }}</h3>
+
+		<a style="width: 100%" nxPlainButton href="https://maps.app.goo.gl/2wDh42KuEFWFaPaw7" target="_blank">
+			{{ 'location.text' | translate }}
+		</a>
+
+		<figure nxFigure>
+			<a href="assets/images/location.png" target="_blank"><img src="assets/images/location.png" width="100%" height="100%" /></a>
+		</figure>
+	</div>
+</ng-template>
