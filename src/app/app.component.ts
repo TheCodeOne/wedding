@@ -74,22 +74,23 @@ export class AppComponent implements OnInit {
 
 		this.setInitialLoadingState()
 
+		this.finalQueryParams$.subscribe(params => {
+			const code = params['code']
+			if (code) {
+				this.init({ value: code, isUuid: false })
+				return
+			} else {
+				this.isLoading = false
+				this.showContent = false
+			}
+		})
+
 		const uuid = localStorage.getItem('uuid')
 		if (uuid) {
 			this.init({ value: uuid, isUuid: true })
 			this.codeSucessfullyEntered = true
 			return
 		}
-
-		this.finalQueryParams$.subscribe(params => {
-			const code = params['code']
-			if (code) {
-				this.init({ value: code, isUuid: false })
-			} else {
-				this.isLoading = false
-				this.showContent = false
-			}
-		})
 
 		this.codeForm.valueChanges.subscribe(async value => {
 			if (value.keyCode.length === 6) {
