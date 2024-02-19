@@ -27,7 +27,7 @@
     "first": {
       "text": "Wir werden zur Feier kommen",
       "options": {
-        "yes": "kommen",
+        "yes": "können",
         "no": "leider nicht kommen können"
       }
     },
@@ -35,7 +35,7 @@
       "first": {
         "text": "Ich werde zur Feier kommen",
         "options": {
-          "yes": "kommen",
+          "yes": "können",
           "no": "leider nicht kommen können"
         }
       },
