@@ -216,11 +216,26 @@
 
 		<p nxCopytext="large" class="nx-margin-bottom-s nx-font-weight-bold">{{ 'presents.title' | translate }}</p>
 		<p nxCopytext="large" class="nx-margin-bottom-s">{{ 'presents.text' | translate }}</p>
-		<p nxHeadline="subsection-xsmall" class="nx-margin-bottom-m">
+		<div nxHeadline="subsection-xsmall">
 			<nx-link>
-				<a target="_blank" href="{{ 'presents.paypal.link' | translate }}">{{ 'presents.paypal.name' | translate }}</a>
+				<a target="_blank" href="{{ privateData.paypal }}">{{ 'presents.paypal.name' | translate }} ({{ privateData.mail }})</a>
 			</nx-link>
-		</p>
+		</div>
+		<div class="nx-margin-bottom-m">
+			<br />
+			<h3 nxHeadline="subsection-small">{{ 'presents.bank.name' | translate }}:</h3>
+			<ul>
+				<li>
+					<span nxCopytext="large">Name: {{ privateData.name }}</span>
+				</li>
+				<li>
+					<span nxCopytext="large">IBAN: {{ privateData.iban }}</span>
+				</li>
+				<li>
+					<span nxCopytext="large">BIC: {{ privateData.bic }}</span>
+				</li>
+			</ul>
+		</div>
 	</div>
 </ng-template>
 

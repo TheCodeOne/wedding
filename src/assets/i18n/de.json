@@ -70,8 +70,10 @@
     "title": "Wenn ihr uns etwas schenken möchtet, freuen wir uns über Finanzspritzen für unsere Hochzeitsreise.",
     "text": "Noch mehr freuen wir uns, wenn uns die Finanzspritzen nicht in Form von Bargeld, sondern digital erreichen.",
     "paypal": {
-      "name": "Paypal",
-      "link": "http://www.paypal.me/DimitriosKokkonias"
+      "name": "Paypal.me"
+    },
+    "bank": {
+      "name": "Bankverbindung"
     }
   },
   "trauzeugen": {

@@ -7,6 +7,11 @@ const backendUrl = isDevMode() ? 'http://localhost:3000' : 'https://wedding-back
 export interface PrivateData {
 	maidOfHonor: Data
 	bestMan: Data
+	name: string
+	iban: string
+	bic: string
+	mail: string
+	paypal: string
 }
 
 interface Data {

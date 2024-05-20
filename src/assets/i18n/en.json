@@ -70,8 +70,10 @@
     "title": "If you would like to give us a present, we would appreciate financial contributions for our honeymoon.",
     "text": "We would be even more delighted if the financial contributions reached us digitally rather than in cash.",
     "paypal": {
-      "name": "Paypal",
-      "link": "http://www.paypal.me/DimitriosKokkonias"
+      "name": "Paypal.me"
+    },
+    "bank": {
+      "name": "Bank details"
     }
   },
   "trauzeugen": {
